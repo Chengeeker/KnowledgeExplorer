@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Original encyclopedia mascot: teal explorer book, magnifying glass and curious star. -->
+    <path android:fillColor="#CFF7E5" android:pathData="M54,3 A51,51 0,1 1,53.99 3 Z"/>
+    <path android:strokeColor="#187A83" android:strokeWidth="4"
+        android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M23,11 A10,10 0,1 1,22.99 11 Z"/>
+    <path android:strokeColor="#187A83" android:strokeWidth="5"
+        android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M30,29 L38,37"/>
+    <path android:fillColor="#187A83" android:pathData="M18,38 Q36,28 53,38 L53,82 Q33,73 18,81 Z"/>
+    <path android:fillColor="#0D5665" android:pathData="M55,38 Q74,28 90,38 L90,81 Q72,74 55,82 Z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M23,43 Q37,36 51,44 L51,76 Q37,69 23,75 Z"/>
+    <path android:fillColor="#FFF4D8" android:pathData="M57,44 Q72,36 85,43 L85,75 Q71,69 57,76 Z"/>
+    <path android:fillColor="#1A6470" android:pathData="M30,52 a3,3 0,1 0,6 0 a3,3 0,1 0,-6 0"/>
+    <path android:fillColor="#1A6470" android:pathData="M65,52 a3,3 0,1 0,6 0 a3,3 0,1 0,-6 0"/>
+    <path android:strokeColor="#FAAB42" android:strokeWidth="3.8" android:fillColor="#00000000" android:strokeLineCap="round"
+        android:pathData="M38,63 Q54,71 68,63"/>
+    <path android:strokeColor="#FAAB42" android:strokeWidth="5" android:fillColor="#00000000" android:strokeLineCap="round"
+        android:pathData="M78,18 L84,12"/>
+    <path android:fillColor="#FFC85D" android:pathData="M81,14 L85,21 L93,23 L86,28 L87,36 L81,31 L74,35 L76,27 L70,22 L78,21 Z"/>
+    <path android:strokeColor="#FAAB42" android:strokeWidth="4" android:fillColor="#00000000" android:strokeLineCap="round"
+        android:pathData="M12,28 L21,22"/>
+</vector>

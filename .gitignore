@@ -1,0 +1,17 @@
+.gradle/
+.kotlin/
+build/
+app/build/
+local.properties
+*.apk
+key.properties
+*.bks
+*.p12
+private/
+*.log
+.idea/
+*.iml
+
+# Python cache and transient patch scripts
+__pycache__/
+*.pyc

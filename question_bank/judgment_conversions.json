@@ -1,0 +1,322 @@
+[
+  {
+    "id": "GK1-0107",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "我们夜晚看到的月光主要从哪里来？",
+    "answer_only_question": "判断正误：月亮看起来很亮，主要是因为它反射了太阳光。",
+    "four_choice_answer": "月球反射的太阳光",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK1-0118",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "下面哪种饮食方式更有利于身体健康？",
+    "answer_only_question": "判断正误：每天吃各种合适的食物，比只吃零食更有利于身体健康。",
+    "four_choice_answer": "每天合理搭配不同种类的食物",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK1-0122",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "食物掉到明显肮脏的地面上后，应该怎样处理？",
+    "answer_only_question": "判断正误：食物掉到脏地上以后可以直接捡起来吃。",
+    "four_choice_answer": "不要直接捡起来吃",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK1-0124",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "发现饮用水有明显异味时，怎样做更安全？",
+    "answer_only_question": "判断正误：发现饮用水有明显异味时，应暂停饮用并告诉成年人。",
+    "four_choice_answer": "暂停饮用并告知成年人",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK1-0126",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "手上有明显污物时，哪种方法更适合清洁双手？",
+    "answer_only_question": "判断正误：洗手用流动水比只用干纸巾擦手更有利于去除污物。",
+    "four_choice_answer": "用流动水和肥皂或洗手液洗手",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK1-0127",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "被虫子叮咬后，哪种做法更安全？",
+    "answer_only_question": "判断正误：皮肤被虫子叮咬后可以随意用尖锐物挑破。",
+    "four_choice_answer": "不要随意用尖锐物刺破皮肤",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK1-0130",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "行人绿灯亮起时，哪种过马路方式正确？",
+    "answer_only_question": "判断正误：绿色行人信号灯亮时，过马路也应观察车辆，确认安全。",
+    "four_choice_answer": "观察车辆并确认安全后通行",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK1-0133",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "在公交车站台候车时，正确的做法是什么？",
+    "answer_only_question": "判断正误：站在公交车站台等车时能靠近路缘追逐打闹。",
+    "four_choice_answer": "站在安全区域等候并有序上车",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK1-0138",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "乘坐行驶中的校车时应该怎样？",
+    "answer_only_question": "判断正误：坐校车时能在车内奔跑。",
+    "four_choice_answer": "在座位上坐好并遵守乘车规则",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK1-0140",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "儿童发现有人触电时，哪种做法最安全？",
+    "answer_only_question": "判断正误：看到有人触电时，儿童应远离带电设备、立即呼救，不能直接用手拉人。",
+    "four_choice_answer": "远离带电设备并立即呼救",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK1-0141",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "看到不认识的药片时，应该怎样？",
+    "answer_only_question": "判断正误：看到陌生药片能当糖果吃。",
+    "four_choice_answer": "不随意服用并告诉成年人",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK1-0143",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "儿童发现有人落水时，首先应该怎么做？",
+    "answer_only_question": "判断正误：遇到有人落水时，儿童应立即呼救并寻求成年人帮助，不应贸然下水。",
+    "four_choice_answer": "立即呼救并寻求成年人帮助，不贸然下水",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK1-0146",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "玩耍时，下面哪种行为更安全？",
+    "answer_only_question": "判断正误：玩耍时能把小珠子塞进鼻孔里。",
+    "four_choice_answer": "不把小珠子等异物塞进鼻孔",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK1-0150",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "使用剪刀时，哪种做法更安全？",
+    "answer_only_question": "判断正误：使用剪刀时，尖端应该朝向同学。",
+    "four_choice_answer": "让尖端远离他人并谨慎使用",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK1-0152",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "儿童独自在家遇到陌生人敲门，怎样做更安全？",
+    "answer_only_question": "判断正误：独自在家时遇到陌生人敲门，应先联系家长，不要随意开门。",
+    "four_choice_answer": "不随意开门，先联系家长核实",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK1-0153",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "发现电线外皮破损时，应该怎样？",
+    "answer_only_question": "判断正误：发现电线外皮破损时能继续触碰。",
+    "four_choice_answer": "不要触碰并立即告知成年人",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK2-0264",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "天气预报中的“晴”和“多云”主要依据什么来区分？",
+    "answer_only_question": "判断正误：天气预报中的“多云”和“晴”表示不同的云量情况。",
+    "four_choice_answer": "天空中的云量状况",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK2-0267",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "关于空气中的水蒸气，哪个说法正确？",
+    "answer_only_question": "判断正误：空气中能有看不见的水蒸气。",
+    "four_choice_answer": "水蒸气是肉眼通常看不见的气体",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK2-0284",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "闻到明显燃气气味时，下面哪种做法正确？",
+    "answer_only_question": "判断正误：闻到浓烈燃气气味时，不能操作电灯开关，应离开危险区域并告知成年人。",
+    "four_choice_answer": "不操作电器开关，远离危险区域并向成年人求助",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK2-0285",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "带电电器起火时，下面哪种做法正确？",
+    "answer_only_question": "判断正误：电器着火时可以直接往带电设备上泼水。",
+    "four_choice_answer": "远离危险并寻求成年人及专业人员处置",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK2-0286",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "热水壶刚烧完水时，哪种做法更安全？",
+    "answer_only_question": "判断正误：热水壶刚烧完水时，壶身可能很烫，应避免直接触摸。",
+    "four_choice_answer": "避免直接触摸可能很烫的壶身",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK2-0287",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "关于插座孔的安全使用，下列哪项正确？",
+    "answer_only_question": "判断正误：摸插座孔是安全游戏。",
+    "four_choice_answer": "不要将手指或金属物塞进插座孔",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK2-0288",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "乘坐自动扶梯时，下面哪种行为正确？",
+    "answer_only_question": "判断正误：乘坐扶梯时可以坐在扶手带上。",
+    "four_choice_answer": "站稳扶好，不在扶手带上坐卧",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK2-0291",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "地震发生时，哪种逃生方式更安全？",
+    "answer_only_question": "判断正误：地震发生时，应避免乘坐电梯逃生。",
+    "four_choice_answer": "避免乘坐电梯，遵循应急避险指引",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK2-0295",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "遇到网络上有人辱骂别人时，哪种做法恰当？",
+    "answer_only_question": "判断正误：看到有人在网络上辱骂他人可以跟着做。",
+    "four_choice_answer": "不跟风辱骂，必要时报告可信赖的成年人",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK2-0297",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "面对厚度不明的河面冰层，哪种行为更安全？",
+    "answer_only_question": "判断正误：河面结冰后可以在不明厚度的冰面上玩耍。",
+    "four_choice_answer": "不要上冰面玩耍",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK2-0299",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "遭遇校园欺凌时，应该怎么办？",
+    "answer_only_question": "判断正误：遭遇校园欺凌时，应及时告诉老师、家长等可信赖的成年人。",
+    "four_choice_answer": "及时向老师、家长等可信赖的成年人求助",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK2-0300",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "皮肤被热水烫伤后，以下哪项处理原则正确？",
+    "answer_only_question": "判断正误：烧伤后可以直接涂牙膏代替正确处理。",
+    "four_choice_answer": "及时用流动的凉水冷却并寻求成年人帮助",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK2-0380",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "体育运动结束后，哪种做法更合理？",
+    "answer_only_question": "判断正误：运动后立刻停下并大量吃冷饮是好习惯。",
+    "four_choice_answer": "逐渐放缓活动并根据需要适量补水",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK2-0394",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "收到来源不明的网络链接，哪种处理方式正确？",
+    "answer_only_question": "判断正误：收到不明来源的网络链接时，应核实来源，不要随意点击。",
+    "four_choice_answer": "核实来源，不随意点击",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK3-0535",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "声音在什么环境下不能正常传播？",
+    "answer_only_question": "判断正误：声音传播需要物质介质，不能在真空中传播。",
+    "four_choice_answer": "真空",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK3-0536",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "下面哪种关于磁铁的描述正确？",
+    "answer_only_question": "判断正误：磁铁能明显吸引铁等部分金属，但不能吸引所有金属。",
+    "four_choice_answer": "能吸引铁等部分金属，但不能吸引所有金属",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK3-0574",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "设置网络账号密码时，哪种方式更安全？",
+    "answer_only_question": "判断正误：使用网络时，密码最好设置得简单易猜。",
+    "four_choice_answer": "使用较长且不容易猜出的独立密码",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK3-0575",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "陌生人在网上索要个人照片时，哪种做法更安全？",
+    "answer_only_question": "判断正误：在网上发现陌生人请求个人照片时可以直接发给他。",
+    "four_choice_answer": "先拒绝随意发送并与家长等成年人商量",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK3-0577",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "收到不明来历的可执行附件时，哪种做法更安全？",
+    "answer_only_question": "判断正误：别人未经同意发来的不明附件可以随便运行。",
+    "four_choice_answer": "不随意运行，先核实来源",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK4-0702",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "眼睛里进入异物后，哪种处理方式更合适？",
+    "answer_only_question": "判断正误：眼睛进入异物时，不应用脏手反复揉眼，应及时寻求合适帮助。",
+    "four_choice_answer": "避免用脏手反复揉眼，必要时求助",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK4-0740",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "关于万里长城的修建，下列说法哪项正确？",
+    "answer_only_question": "判断正误：万里长城不是在同一时期一次建成的。",
+    "four_choice_answer": "长城经历多个历史时期修筑与修缮",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK4-0783",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "我们能看到月球，主要是因为什么？",
+    "answer_only_question": "判断正误：月球自身会像太阳那样进行核聚变发光。",
+    "four_choice_answer": "月球反射太阳光",
+    "answer_only_answer": "错误"
+  },
+  {
+    "id": "GK6-1024",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "关于行人过马路，哪项行为符合交通规则？",
+    "answer_only_question": "判断正误：行人闯红灯属于违反道路交通规则的行为。",
+    "four_choice_answer": "遵守信号灯指示，在允许通行时安全通过",
+    "answer_only_answer": "正确"
+  },
+  {
+    "id": "GK6-1093",
+    "conversion_type": "判断题→四选一",
+    "four_choice_question": "科学实验记录观测数据时，哪种做法正确？",
+    "answer_only_question": "判断正误：科学实验记录数据时，应该只写支持猜想的数据。",
+    "four_choice_answer": "如实记录所有符合要求的观测数据",
+    "answer_only_answer": "错误"
+  }
+]
