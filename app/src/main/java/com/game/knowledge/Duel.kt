@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -207,11 +206,11 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
                     verticalArrangement=Arrangement.spacedBy(12.dp)) {
                     TopLine("🤖 AI 知识对决",onBack,
                         "🔵 $leftScore : $rightScore 🤖",vibrateOnBack=false)
-                    Text(if(speed) "同一道题 · 第 ${raceIndex+1}/${questions.size} 题"
+                    PinyinText(if(speed) "同一道题 · 第 ${raceIndex+1}/${questions.size} 题"
                         else "你的进度 ${leftIndex.coerceAtMost(questions.size)}/${questions.size} · AI ${rightIndex.coerceAtMost(questions.size)}/${questions.size}",
                         fontSize=15.sp,color=Ink,fontWeight=FontWeight.Bold)
                     if(speed && raceWinner>=0) {
-                        Text(if(raceWinner==0) "✅ 你抢答成功！"
+                        PinyinText(if(raceWinner==0) "✅ 你抢答成功！"
                             else "⚡ AI 已抢答成功！",
                             fontSize=19.sp,color=Ink,fontWeight=FontWeight.Black)
                     }
@@ -233,7 +232,7 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
                             } else {
                                 Column(Modifier.fillMaxSize(),verticalArrangement=Arrangement.Center,
                                     horizontalAlignment=Alignment.CenterHorizontally){
-                                    Text("✅ 你已完成，正在等待 AI！",
+                                    PinyinText("✅ 你已完成，正在等待 AI！",
                                         color=Sea,fontSize=23.sp,fontWeight=FontWeight.Black)
                                 }
                             }
@@ -242,13 +241,13 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
                             Column(Modifier.fillMaxSize(),
                                 verticalArrangement=Arrangement.SpaceEvenly,
                                 horizontalAlignment=Alignment.CenterHorizontally) {
-                                Text("🤖 AI 对手",fontSize=27.sp,color=Ink,
+                                PinyinText("🤖 AI 对手",fontSize=27.sp,color=Ink,
                                     fontWeight=FontWeight.Black)
-                                Text(listOf("简单","中等","困难","噩梦")[aiLevel.coerceIn(0,3)],
+                                PinyinText(listOf("简单","中等","困难","噩梦")[aiLevel.coerceIn(0,3)],
                                     fontSize=21.sp,color=Sea,fontWeight=FontWeight.Bold)
-                                Text("🔵 $leftScore : $rightScore 🤖",
+                                PinyinText("🔵 $leftScore : $rightScore 🤖",
                                     fontSize=29.sp,color=Ink,fontWeight=FontWeight.Black)
-                                Text(when {
+                                PinyinText(when {
                                     rightQ==null -> "AI 已完成全部题目"
                                     rightFeedback==null -> "AI 正在思考中……"
                                     mayReveal -> "AI 已答对：${rightQ.answer}"
@@ -264,11 +263,11 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
             .padding(15.dp),horizontalAlignment=Alignment.CenterHorizontally,
             verticalArrangement=Arrangement.spacedBy(12.dp)) {
             TopLine("🤖 AI 知识对决",onBack,"🔵 $leftScore : $rightScore 🤖",vibrateOnBack=false)
-            Text(if(speed) "同一道题 · 第 ${raceIndex+1}/${questions.size} 题"
+            PinyinText(if(speed) "同一道题 · 第 ${raceIndex+1}/${questions.size} 题"
                 else "你的进度 ${leftIndex.coerceAtMost(questions.size)}/${questions.size} · AI ${rightIndex.coerceAtMost(questions.size)}/${questions.size}",
                 fontSize=15.sp,color=Ink,fontWeight=FontWeight.Bold)
             if(speed && raceWinner>=0) {
-                Text(if(raceWinner==0) "✅ 你抢答成功！"
+                PinyinText(if(raceWinner==0) "✅ 你抢答成功！"
                     else "⚡ AI 已抢答成功！",
                     fontSize=19.sp,color=Ink,fontWeight=FontWeight.Black)
             }
@@ -277,14 +276,14 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
                 DuelQuestion(leftQ,"🔵 你的题目",leftFeedback,reveal,
                     speed && (raceWinner>=0||wrongLeft) || !speed && leftFeedback!=null,
                     Modifier.fillMaxWidth(),false,{ submit(0,it) })
-            } else Text("✅ 你已完成，等待 AI……",color=Ink,fontSize=21.sp)
+            } else PinyinText("✅ 你已完成，等待 AI……",color=Ink,fontSize=21.sp)
             StoryCard(Modifier.fillMaxWidth(),SoftBlue) {
-                Text("🤖 AI · ${listOf("简单","中等","困难","噩梦")[aiLevel.coerceIn(0,3)]}",
+                PinyinText("🤖 AI · ${listOf("简单","中等","困难","噩梦")[aiLevel.coerceIn(0,3)]}",
                     fontSize=16.sp,fontWeight=FontWeight.Black,color=Ink)
                 val mayReveal=if(speed) raceWinner>=0 else
                     rightFeedback!=null && (leftIndex>rightIndex ||
                         leftIndex==rightIndex && leftFeedback!=null)
-                Text(when {
+                PinyinText(when {
                     rightQ==null -> "AI 已完成全部题目"
                     rightFeedback==null -> "AI 正在思考中……"
                     mayReveal -> "AI 已答对：${rightQ.answer}"
@@ -301,8 +300,8 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
                 Column(Modifier.fillMaxSize().padding(22.dp),
                     horizontalAlignment=Alignment.CenterHorizontally,
                     verticalArrangement=Arrangement.Center) {
-                    Text("↔️ 请将平板横过来",fontSize=24.sp,fontWeight=FontWeight.Black,color=Ink)
-                    Text("双人对战需要横屏，各自坐在平板短边的一侧。",color=Ink)
+                    PinyinText("↔️ 请将平板横过来",fontSize=24.sp,fontWeight=FontWeight.Black,color=Ink)
+                    PinyinText("双人对战需要横屏，各自坐在平板短边的一侧。",color=Ink)
                     KidLink("← 返回",onBack,vibrateOnClick=false)
                 }
             } else {
@@ -311,7 +310,7 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
                     Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
                         KidPill("← 退出对决",onBack,vibrateOnClick=false)
                         Spacer(Modifier.weight(1f))
-                        Text(if(speed) "⚡ 速度优先" else "🎯 正确率优先",
+                        PinyinText(if(speed) "⚡ 速度优先" else "🎯 正确率优先",
                             color=Ink,fontWeight=FontWeight.Black,fontSize=13.sp)
                     }
                     Row(Modifier.fillMaxSize(),horizontalArrangement=Arrangement.spacedBy(4.dp)) {
@@ -343,16 +342,16 @@ private fun DuelScoreCenter(left:Int,right:Int,total:Int,leftIndex:Int,rightInde
         .background(Color.White.copy(alpha=.91f)).padding(5.dp),
         horizontalAlignment=Alignment.CenterHorizontally,
         verticalArrangement=Arrangement.SpaceBetween) {
-        Text("第 ${(leftIndex+1).coerceAtMost(total)}/$total 题",
+        PinyinText("第 ${(leftIndex+1).coerceAtMost(total)}/$total 题",
             fontSize=12.sp,color=Ink,fontWeight=FontWeight.Bold,textAlign=TextAlign.Center)
         Column(horizontalAlignment=Alignment.CenterHorizontally,
             verticalArrangement=Arrangement.spacedBy(4.dp)) {
-            Text("$left : $right",fontSize=25.sp,color=Ink,
+            PinyinText("$left : $right",fontSize=25.sp,color=Ink,
                 fontWeight=FontWeight.Black,textAlign=TextAlign.Center)
-            Text("🔵 VS 🟠",fontSize=11.sp,color=Ink,textAlign=TextAlign.Center)
-            Text("比分",fontSize=12.sp,color=Sea)
+            PinyinText("🔵 VS 🟠",fontSize=11.sp,color=Ink,textAlign=TextAlign.Center)
+            PinyinText("比分",fontSize=12.sp,color=Sea)
         }
-        Text("第 ${(rightIndex+1).coerceAtMost(total)}/$total 题",
+        PinyinText("第 ${(rightIndex+1).coerceAtMost(total)}/$total 题",
             fontSize=12.sp,color=Ink,fontWeight=FontWeight.Bold,textAlign=TextAlign.Center)
     }
 }
@@ -372,12 +371,12 @@ private fun RotatedSeat(q:KnowledgeQuestion?,side:Int,total:Int,
             .padding(9.dp),
             horizontalAlignment=Alignment.CenterHorizontally,
             verticalArrangement=Arrangement.spacedBy(8.dp)) {
-            Text(if(side==0) "🔵 蓝方探险家" else "🟠 橙方探险家",
+            PinyinText(if(side==0) "🔵 蓝方探险家" else "🟠 橙方探险家",
                 fontSize=16.sp,color=Ink,fontWeight=FontWeight.Black)
             // Keep the notice OUTSIDE the independently scrollable question.
             // A player who loses the race can always see the result at a glance.
             if(status.isNotBlank()) {
-                Text(status,
+                PinyinText(status,
                     modifier=Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp))
                         .background(Color.White.copy(alpha=.80f))
                         .padding(horizontal=7.dp,vertical=6.dp),
@@ -406,7 +405,7 @@ private fun RotatedSeat(q:KnowledgeQuestion?,side:Int,total:Int,
                 }
             } else {
                 Box(Modifier.fillMaxWidth().weight(1f),contentAlignment=Alignment.Center) {
-                    Text("✅ 我已经完成啦！",color=Ink,fontSize=20.sp)
+                    PinyinText("✅ 我已经完成啦！",color=Ink,fontSize=20.sp)
                 }
             }
         }
@@ -421,9 +420,9 @@ private fun DuelQuestion(q:KnowledgeQuestion,heading:String,feedback:DuelFeedbac
     Column(modifier,horizontalAlignment=Alignment.CenterHorizontally,
         verticalArrangement=if(spread) Arrangement.SpaceEvenly
             else Arrangement.spacedBy(if(compact) 7.dp else 12.dp)) {
-        Text(heading,color=Sea,fontSize=if(compact) 14.sp else 18.sp,
+        PinyinText(heading,color=Sea,fontSize=if(compact) 14.sp else 18.sp,
             fontWeight=FontWeight.Black)
-        Text(q.question,fontSize=if(compact) 18.sp else 23.sp,
+        PinyinText(q.question,fontSize=if(compact) 18.sp else 23.sp,
             lineHeight=if(compact) 25.sp else 31.sp,
             color=Ink,fontWeight=FontWeight.Black,textAlign=TextAlign.Center)
         val choices=remember(q.id) {q.options.shuffled(Random(q.id.hashCode()))}
@@ -440,12 +439,12 @@ private fun DuelQuestion(q:KnowledgeQuestion,heading:String,feedback:DuelFeedbac
             }
         }
         if(reveal) {
-            Text("答案：${q.answer}",color=Sea,fontSize=if(compact) 14.sp else 17.sp,
+            PinyinText("答案：${q.answer}",color=Sea,fontSize=if(compact) 14.sp else 17.sp,
                 fontWeight=FontWeight.Black,textAlign=TextAlign.Center)
         } else if(feedback!=null) {
-            Text("🌱 再试一次！",color=Ink,fontSize=14.sp)
+            PinyinText("🌱 再试一次！",color=Ink,fontSize=14.sp)
         } else {
-            Text("先想好，再作答",color=Ink.copy(alpha=.75f),fontSize=13.sp)
+            PinyinText("先想好，再作答",color=Ink.copy(alpha=.75f),fontSize=13.sp)
         }
     }
 }

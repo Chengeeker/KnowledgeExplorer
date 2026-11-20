@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -35,6 +34,7 @@ private const val SETTINGS = "settings"
 private const val STUDY = "study"
 private const val QUIZ = "quiz"
 private const val DUEL = "duel"
+private const val CANTONESE = "cantonese"
 
 @Composable
 private fun WorldApp() {
@@ -81,6 +81,7 @@ private fun WorldApp() {
     }
     var pcmVoice by rememberSaveable {mutableStateOf(prefs.getBoolean("pcmVoice",tablet))}
     LaunchedEffect(pcmVoice) {narrator.setPcmEnabled(pcmVoice)}
+    var showPinyin by rememberSaveable {mutableStateOf(prefs.getBoolean("showPinyin",false))}
     var autoRead by rememberSaveable {mutableStateOf(prefs.getBoolean("autoRead",true))}
     var haptics by rememberSaveable {mutableStateOf(prefs.getBoolean("haptics",true))}
     var musicEnabled by rememberSaveable {mutableStateOf(prefs.getBoolean("musicEnabled",true))}
@@ -103,6 +104,7 @@ private fun WorldApp() {
     fun save() {
         prefs.edit().putInt("grade",grade).putString("domain",domain)
             .putString("topic",topic).putString("kind",kind).putInt("count",count)
+            .putBoolean("showPinyin",showPinyin)
             .putBoolean("autoRead",autoRead).putBoolean("pcmVoice",pcmVoice)
             .putBoolean("haptics",haptics)
             .putBoolean("musicEnabled",musicEnabled).putInt("musicVolume",musicVolume)
@@ -122,7 +124,7 @@ private fun WorldApp() {
         sessionNonce++
         screen=next
     }
-    fun home() {narrator.stop();screen=HOME}
+    fun home() {narrator.stop();audio.setNarrating(false);screen=HOME}
     LaunchedEffect(screen,deck) {
         if(screen !in listOf(STUDY,QUIZ)) narrator.stop()
         if(screen in listOf(STUDY,QUIZ,DUEL) && deck.isEmpty()) screen=HOME
@@ -138,7 +140,8 @@ private fun WorldApp() {
         }
     }
 
-    CompositionLocalProvider(LocalKidFeedback provides feedback) {
+    CompositionLocalProvider(LocalKidFeedback provides feedback,
+        LocalShowPinyin provides showPinyin) {
         PaintedBackground {
             when(screen) {
                 HOME -> HomeScreen(bank.size,prefs.getInt("played",0),
@@ -146,11 +149,13 @@ private fun WorldApp() {
                     onStudy={start(STUDY)},
                     onQuiz={start(QUIZ)},
                     onDuel={start(DUEL)},
+                    onCantonese={narrator.stop();screen=CANTONESE},
                     onSettings={screen=SETTINGS})
                 SETTINGS -> KnowledgeSettings(
                     all=bank,filter=filter,count=count,
                     withAi=withAi,duelMode=duelMode,aiLevel=aiLevel,
                     autoRead=autoRead,haptics=haptics,pcmVoice=pcmVoice,
+                    showPinyin=showPinyin,
                     musicEnabled=musicEnabled,musicVolume=musicVolume,soundEffects=soundEffects,
                     voiceReady=narrator.ready,voiceStatus=narrator.message,
                     onFilter={grade=it.grade;domain=it.domain;topic=it.topic;kind=it.kind;save()},
@@ -158,6 +163,7 @@ private fun WorldApp() {
                     onWithAi={withAi=it;save()},
                     onDuelMode={duelMode=it;save()},
                     onAiLevel={aiLevel=it;save()},
+                    onShowPinyin={showPinyin=it;save()},
                     onAutoRead={autoRead=it;save()},
                     onPcmVoice={pcmVoice=it;save()},
                     onHaptics={haptics=it;feedback.enabled=it;save()},
@@ -177,6 +183,8 @@ private fun WorldApp() {
                         prefs.edit().putInt("played",prefs.getInt("played",0)+1)
                             .putInt("correct",prefs.getInt("correct",0)+correct).apply()
                     })}
+                CANTONESE -> CantonesePlayground(
+                    onBack={home()},onNarrating={audio.setNarrating(it)})
                 DUEL -> key(sessionNonce) {DuelScreen(deck,withAi,duelMode=="速度优先",aiLevel,
                     onBack={exitConfirm=true},onAgain={start(DUEL)},onHome={home()},
                     onCompleted={roundCompleted=true})}
@@ -185,8 +193,8 @@ private fun WorldApp() {
                 Column(Modifier.fillMaxSize().padding(24.dp),
                     horizontalAlignment=Alignment.CenterHorizontally,
                     verticalArrangement=Arrangement.Center) {
-                    Text("题库读取失败",fontSize=24.sp)
-                    Text("请确认 questions.json 已打包进入应用。")
+                    PinyinText("题库读取失败",fontSize=24.sp)
+                    PinyinText("请确认 questions.json 已打包进入应用。")
                 }
             }
         }
@@ -202,9 +210,9 @@ private fun WorldApp() {
         if(noQuestions) {
             Dialog(onDismissRequest={noQuestions=false}) {
                 StoryCard(Modifier.fillMaxWidth(),PaleMint) {
-                    Text("📭 还没有匹配的题目",fontSize=22.sp,
+                    PinyinText("📭 还没有匹配的题目",fontSize=22.sp,
                         fontWeight=FontWeight.Black,color=Ink)
-                    Text("当前年级、领域或主题的组合没有题目，可以回到设置里放宽范围。",
+                    PinyinText("当前年级、领域或主题的组合没有题目，可以回到设置里放宽范围。",
                         color=Ink)
                     LargeAction("⚙️ 前往设置",{
                         noQuestions=false;screen=SETTINGS

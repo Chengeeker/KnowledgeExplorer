@@ -65,7 +65,7 @@ fun LargeAction(text: String, onClick: () -> Unit, modifier: Modifier = Modifier
         .border(2.dp,Color.White.copy(alpha=.8f),shape)
         .clickable(enabled=enabled) { feedback?.tap();onClick() }
         .padding(horizontal=16.dp,vertical=11.dp),contentAlignment=Alignment.Center) {
-        Text(text,fontSize=18.sp,fontWeight=FontWeight.ExtraBold,
+        PinyinText(text,fontSize=18.sp,fontWeight=FontWeight.ExtraBold,
             color=Color.White,textAlign=TextAlign.Center)
     }
 }
@@ -80,7 +80,7 @@ fun KidPill(label:String,onClick:()->Unit,modifier:Modifier=Modifier,
         .border(1.5.dp,Color(0xFFD6E9DD),shape)
         .clickable {if(vibrateOnClick) feedback?.tap();onClick()}
         .padding(horizontal=13.dp,vertical=8.dp),contentAlignment=Alignment.Center) {
-        Text(label,color=Ink,fontWeight=FontWeight.ExtraBold,fontSize=14.sp,
+        PinyinText(label,color=Ink,fontWeight=FontWeight.ExtraBold,fontSize=14.sp,
             textAlign=TextAlign.Center)
     }
 }
@@ -89,7 +89,7 @@ fun KidPill(label:String,onClick:()->Unit,modifier:Modifier=Modifier,
 fun KidLink(label:String,onClick:()->Unit,modifier:Modifier=Modifier,
             enabled:Boolean=true,vibrateOnClick:Boolean=true) {
     val feedback=LocalKidFeedback.current
-    Text(label,color=if(enabled) Sea else Ink.copy(alpha=.4f),
+    PinyinText(label,color=if(enabled) Sea else Ink.copy(alpha=.4f),
         fontWeight=FontWeight.ExtraBold,fontSize=14.sp,
         modifier=modifier.clip(RoundedCornerShape(13.dp))
             .clickable(enabled=enabled) {if(vibrateOnClick) feedback?.tap();onClick()}
@@ -102,9 +102,9 @@ fun TopLine(title:String,onBack:()->Unit, extra: String?=null,
     Row(Modifier.fillMaxWidth(), verticalAlignment=Alignment.CenterVertically,
         horizontalArrangement=Arrangement.spacedBy(9.dp)) {
         KidPill("← 返回",onBack,vibrateOnClick=vibrateOnBack)
-        Text(title,fontSize=22.sp,fontWeight=FontWeight.Black,
+        PinyinText(title,fontSize=22.sp,fontWeight=FontWeight.Black,
             maxLines=1,overflow=TextOverflow.Ellipsis,modifier=Modifier.weight(1f))
-        if(extra!=null) Text(extra,fontSize=13.sp,fontWeight=FontWeight.SemiBold,color=Sea)
+        if(extra!=null) PinyinText(extra,fontSize=13.sp,fontWeight=FontWeight.SemiBold,color=Sea)
     }
 }
 
@@ -118,15 +118,15 @@ fun SelectPill(text: String, active:Boolean,onClick:()->Unit) {
             if(active) Color(0xFFFFBB5B) else Color(0xFFD4E5DD),shape)
         .clickable { feedback?.tap();onClick() }
         .padding(horizontal=12.dp,vertical=10.dp),contentAlignment=Alignment.Center) {
-        Text(text,fontSize=14.sp,color=Ink,
+        PinyinText(text,fontSize=14.sp,color=Ink,
             fontWeight=if(active) FontWeight.ExtraBold else FontWeight.Medium)
     }
 }
 
 @Composable
 fun TitleLine(title:String,desc:String?=null) {
-    Text(title,fontWeight=FontWeight.Black,color=Ink,fontSize=17.sp)
-    if(desc!=null) Text(desc,color=Ink.copy(alpha=.69f),fontSize=13.sp)
+    PinyinText(title,fontWeight=FontWeight.Black,color=Ink,fontSize=17.sp)
+    if(desc!=null) PinyinText(desc,color=Ink.copy(alpha=.69f),fontSize=13.sp)
 }
 
 /** Offline illustration: category-colored landscape + semantic subject art.
@@ -179,10 +179,10 @@ fun EncyclopediaIllustration(question: KnowledgeQuestion?, modifier:Modifier=Mod
             Image(painter=painterResource(id=art),contentDescription=domain,
                 modifier=Modifier.size(iconSize))
             Row(verticalAlignment=Alignment.CenterVertically) {
-                Text(iconOverride ?: question?.let(::pictureFor) ?: "🔍",
+                PinyinText(iconOverride ?: question?.let(::pictureFor) ?: "🔍",
                     fontSize=if(compact) 17.sp else 23.sp)
                 Spacer(Modifier.width(5.dp))
-                Text(if(question==null) "出发！探索奇妙世界" else question.topic,
+                PinyinText(if(question==null) "出发！探索奇妙世界" else question.topic,
                     fontWeight=FontWeight.ExtraBold,
                     fontSize=if(compact) 12.sp else 14.sp,
                     color=Ink.copy(alpha=.86f),maxLines=1,
@@ -207,9 +207,10 @@ fun ChoiceButton(label:String,selected:Boolean?,enabled:Boolean,
         .clickable(enabled=enabled,onClick=onClick)
         .padding(horizontal=9.dp,vertical=9.dp),
         contentAlignment=Alignment.Center) {
-        Text(label,color=Ink,fontSize=if(compact) 15.sp else 18.sp,
+        PinyinText(label,color=Ink,fontSize=if(compact) 15.sp else 18.sp,
             fontWeight=FontWeight.Bold,textAlign=TextAlign.Center,
-            maxLines=if(compact) 3 else 4,overflow=TextOverflow.Ellipsis,
+            maxLines=if(LocalShowPinyin.current) Int.MAX_VALUE else if(compact) 3 else 4,
+            overflow=TextOverflow.Ellipsis,
             lineHeight=if(compact) 18.sp else 23.sp)
     }
 }

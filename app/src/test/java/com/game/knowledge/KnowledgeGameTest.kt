@@ -8,6 +8,58 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 class KnowledgeGameTest {
+    @Test fun cantoneseExpandedChallengeModesFilterAgeAppropriateEntries() {
+        fun e(id:String,kind:String,category:String,meaning:String="意思") =
+            CantoneseWord(id,kind,category,id,id,"zi6",meaning,"🍎","小提示")
+        val entries=listOf(
+            e("a","word","点心茶楼"),e("b","word","交通出行"),
+            e("c","word","家人称呼"),e("d","word","运动游戏"),
+            e("e","phrase","日常对话"),e("f","phrase","日常对话"))
+        val dialogues=CantoneseChallengeRules.eligible(CantoneseChallengeMode.DIALOGUE,entries)
+        assertEquals(listOf("e","f"),dialogues.map {it.id})
+        val treasure=CantoneseChallengeRules.eligible(CantoneseChallengeMode.TREASURE,entries)
+        assertEquals(setOf("a","b"),treasure.map {it.id}.toSet())
+        val bridge=CantoneseChallengeRules.eligible(CantoneseChallengeMode.BRIDGE,entries)
+        assertEquals(setOf("a","b","d"),bridge.map {it.id}.toSet())
+    }
+
+    @Test fun cantoneseExpandedChallengeChoicesStayDistinctAndIncludeAnswer() {
+        val entries=(0..7).map {i->
+            CantoneseWord("w$i","word","点心茶楼","词$i","詞$i",
+                "ci4","点心$i","🥟","认一认")
+        }
+        repeat(48) {seed->
+            val target=entries[seed%entries.size]
+            val options=CantoneseChallengeRules.choices(target,entries,Random(seed))
+            assertEquals(4,options.size)
+            assertEquals(4,options.map {it.id}.toSet().size)
+            assertEquals(1,options.count {it.id==target.id})
+            assertTrue(options.all {it.category==target.category})
+        }
+    }
+
+    @Test fun independentCantoneseVolumeSupportsQuietNormalAndEnhancedPlayback() {
+        assertEquals(150,CantoneseVolumePolicy.DEFAULT_PERCENT)
+        assertEquals(0,CantoneseVolumePolicy.clamp(-25))
+        assertEquals(200,CantoneseVolumePolicy.clamp(300))
+        assertEquals(0f,CantoneseVolumePolicy.playerGain(0),.0001f)
+        assertEquals(.5f,CantoneseVolumePolicy.playerGain(50),.0001f)
+        assertEquals(1f,CantoneseVolumePolicy.playerGain(100),.0001f)
+        assertEquals(1f,CantoneseVolumePolicy.playerGain(200),.0001f)
+        assertEquals(0,CantoneseVolumePolicy.boostMillibels(50))
+        assertEquals(0,CantoneseVolumePolicy.boostMillibels(100))
+        assertTrue(CantoneseVolumePolicy.boostMillibels(150) in 350..355)
+        assertTrue(CantoneseVolumePolicy.boostMillibels(200) in 600..603)
+        assertEquals(75,CantoneseVolumePolicy.step(73.3f))
+        assertEquals(200,CantoneseVolumePolicy.step(205f))
+        assertTrue((0..200 step 5).zipWithNext().all {
+            (first,second) -> CantoneseVolumePolicy.boostMillibels(first)<=
+                CantoneseVolumePolicy.boostMillibels(second)
+        })
+        // TTS fallback cannot exceed its engine's documented 0..1 gain.
+        assertEquals(1f,CantoneseVolumePolicy.ttsGain(200),.0001f)
+    }
+
     private fun q(id:String,grade:Int,stars:Int,domain:String="自然科学",topic:String="动物分类") =
         KnowledgeQuestion(id,grade,domain,topic,"填空题",stars,
             "蝴蝶属于什么动物？","昆虫",listOf("昆虫","鱼类","鸟类","哺乳类"),
@@ -121,6 +173,64 @@ class KnowledgeGameTest {
         assertEquals(listOf("judgment"),KnowledgeBank.matching(list,
             QuestionFilter(grade=-1,kind="判断题")).map { it.id })
     }
+    @Test fun cantoneseJyutpingUsesSixNumberedTones() {
+        assertTrue(CantoneseRules.validJyutping("sik6 faan6"))
+        assertTrue(CantoneseRules.validJyutping("ng5"))
+        assertTrue(CantoneseRules.validJyutping("m4 goi1"))
+        assertFalse(CantoneseRules.validJyutping("ni hao"))
+        assertFalse(CantoneseRules.validJyutping("m4 goi7"))
+        assertFalse(CantoneseRules.validJyutping(""))
+    }
+
+    @Test fun cantoneseListeningOptionsContainUniqueTargetAndLocalDistractors() {
+        val options=(0 until 10).map {
+            CantoneseWord("demo$it","word","点心茶楼","词$it","詞$it",
+                "zi6","例子","🥟","提示")
+        }
+        repeat(80) { seed ->
+            val target=options[seed%options.size]
+            val choices=CantoneseRules.options(options,target,Random(seed))
+            assertEquals(4,choices.size)
+            assertEquals(4,choices.map {it.id}.toSet().size)
+            assertEquals(1,choices.count {it.id==target.id})
+            assertTrue(choices.all {it.category==target.category})
+        }
+        assertEquals(5,CantoneseRules.newRound(options,5,Random(2)).size)
+    }
+
+    @Test fun pinyinPolicyRecognizesChineseWithoutTouchingLatinOrEmoji() {
+        assertTrue(PinyinPolicy.hasHan("春眠不觉晓"))
+        assertTrue(PinyinPolicy.hasHan("🔵 1年级 · 10题"))
+        assertFalse(PinyinPolicy.hasHan("ABC 123 ! 😊"))
+        assertTrue(PinyinPolicy.isHan('春'))
+        assertFalse(PinyinPolicy.isHan('9'))
+    }
+
+    @Test fun pinyinMixedNumbersLettersAndEmojiShareGlyphCells() {
+        // Regression: digits used to sit lower than adjacent annotated Han.
+        val example=PinyinPolicy.glyphs("第12题 · 3年级 😊")
+        assertEquals(listOf("第","1","2","题"," ","·"," ","3","年","级"," ","😊"),
+            example.map {it.value})
+        assertEquals(1,example[1].offset)
+        assertEquals(2,example[2].offset)
+        assertEquals(3,example[3].offset)
+        assertTrue(PinyinPolicy.isVisibleGlyph("2"))
+        assertTrue(PinyinPolicy.isVisibleGlyph("A"))
+        assertTrue(PinyinPolicy.isVisibleGlyph("年"))
+        assertTrue(PinyinPolicy.isVisibleGlyph("😊"))
+        assertFalse(PinyinPolicy.isVisibleGlyph(" "))
+        assertFalse(PinyinPolicy.isVisibleGlyph("\n"))
+        val joined=PinyinPolicy.glyphs("1👩‍👧2")
+        assertEquals(listOf("1","👩‍👧","2"),joined.map{it.value})
+    }
+
+    @Test fun pinyinPolyphonicOverridesCoverCommonLearningWords() {
+        assertEquals(listOf("yīn","yuè"),PinyinPolicy.phraseOverrides["音乐"])
+        assertEquals(listOf("chóng","yáng"),PinyinPolicy.phraseOverrides["重阳"])
+        assertEquals(listOf("háng","zhǎng"),PinyinPolicy.phraseOverrides["行长"])
+        assertEquals(listOf("zhǎng","dà"),PinyinPolicy.phraseOverrides["长大"])
+    }
+
     @Test fun speedRaceNoticeMatchesMathPlanetForBothSeats() {
         assertEquals("⚡ 先答对者得分",DuelRaceNotice.forSide(true,-1,0))
         assertEquals("⚡ 先答对者得分",DuelRaceNotice.forSide(true,-1,1))

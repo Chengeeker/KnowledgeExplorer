@@ -7,7 +7,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,11 +23,12 @@ import androidx.compose.foundation.layout.FlowRow
 fun KnowledgeSettings(
     all: List<KnowledgeQuestion>, filter: QuestionFilter, count: Int,
     withAi: Boolean, duelMode: String, aiLevel: Int,
-    autoRead: Boolean, haptics: Boolean, pcmVoice:Boolean,
+    autoRead: Boolean, haptics: Boolean, pcmVoice:Boolean,showPinyin:Boolean,
     musicEnabled: Boolean, musicVolume: Int, soundEffects: Boolean,
     voiceReady: Boolean, voiceStatus: String,
     onFilter: (QuestionFilter) -> Unit, onCount: (Int) -> Unit,
     onWithAi: (Boolean) -> Unit, onDuelMode: (String) -> Unit, onAiLevel: (Int) -> Unit,
+    onShowPinyin:(Boolean)->Unit,
     onAutoRead: (Boolean) -> Unit, onHaptics: (Boolean) -> Unit,
     onPcmVoice:(Boolean)->Unit,
     onMusicEnabled:(Boolean)->Unit,onMusicVolume:(Int)->Unit,onSoundEffects:(Boolean)->Unit,
@@ -48,8 +48,8 @@ fun KnowledgeSettings(
                     Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
                         DuelSettings(withAi,duelMode,aiLevel,onWithAi,onDuelMode,onAiLevel)
                         Spacer(Modifier.height(12.dp))
-                        InteractionSettings(autoRead,haptics,pcmVoice,musicEnabled,musicVolume,soundEffects,
-                            voiceReady,voiceStatus,onAutoRead,onHaptics,onPcmVoice,
+                        InteractionSettings(autoRead,haptics,pcmVoice,showPinyin,musicEnabled,musicVolume,soundEffects,
+                            voiceReady,voiceStatus,onAutoRead,onHaptics,onPcmVoice,onShowPinyin,
                             onMusicEnabled,onMusicVolume,onSoundEffects,onVoicePreview)
                     }
                 }
@@ -58,8 +58,8 @@ fun KnowledgeSettings(
                     verticalArrangement=Arrangement.spacedBy(12.dp)) {
                     QuestionSettings(all,filter,count,available,onFilter,onCount)
                     DuelSettings(withAi,duelMode,aiLevel,onWithAi,onDuelMode,onAiLevel)
-                    InteractionSettings(autoRead,haptics,pcmVoice,musicEnabled,musicVolume,soundEffects,
-                        voiceReady,voiceStatus,onAutoRead,onHaptics,onPcmVoice,
+                    InteractionSettings(autoRead,haptics,pcmVoice,showPinyin,musicEnabled,musicVolume,soundEffects,
+                        voiceReady,voiceStatus,onAutoRead,onHaptics,onPcmVoice,onShowPinyin,
                         onMusicEnabled,onMusicVolume,onSoundEffects,onVoicePreview)
                 }
             }
@@ -99,7 +99,7 @@ private fun QuestionSettings(
                 }
             }
         }
-        Text("各年级题目独立筛选，不会自动切换年级或混入高年级题。",
+        PinyinText("各年级题目独立筛选，不会自动切换年级或混入高年级题。",
             fontSize=12.sp,color=Ink.copy(alpha=.8f))
         TitleLine("🔖 细分主题",
             if(filter.domain=="全部") "先选择知识领域，可以更容易找到对应细分主题。"
@@ -134,7 +134,7 @@ private fun QuestionSettings(
                 SelectPill("${n}题",count==n) {onCount(n)}
             }
         }
-        Text(
+        PinyinText(
             if(available>0) "当前有 ${available} 道匹配题目，每局随机抽取 ${minOf(available,count)} 道且不重复。"
             else "⚠️ 当前组合没有匹配题目，请放宽领域、主题或原始题型。",
             color=if(available>0) Ink else Color(0xFFA74634),fontSize=14.sp,
@@ -162,7 +162,7 @@ private fun DuelSettings(
                 SelectPill(mode,duelMode==mode) {onDuelMode(mode)}
             }
         }
-        Text(if(duelMode=="速度优先")
+        PinyinText(if(duelMode=="速度优先")
             "同一道题抢答；先答对的一方得分。"
             else "分别完成同一组题；答对数量优先，同分比较总用时。",
             color=Ink,fontSize=13.sp)
@@ -173,7 +173,7 @@ private fun DuelSettings(
                     SelectPill(s,aiLevel==i) {onAiLevel(i)}
                 }
             }
-        } else Text("双人对决将切换横屏，孩子分别坐在平板两端。",
+        } else PinyinText("双人对决将切换横屏，孩子分别坐在平板两端。",
             fontSize=13.sp,color=Ink)
     }
 }
@@ -181,22 +181,30 @@ private fun DuelSettings(
 @Composable
 @OptIn(ExperimentalLayoutApi::class)
 private fun InteractionSettings(
-    autoRead:Boolean,haptics:Boolean,pcmVoice:Boolean,
+    autoRead:Boolean,haptics:Boolean,pcmVoice:Boolean,showPinyin:Boolean,
     musicEnabled:Boolean,musicVolume:Int,soundEffects:Boolean,
     voiceReady:Boolean,voiceStatus:String,
     onAutoRead:(Boolean)->Unit,onHaptics:(Boolean)->Unit,
-    onPcmVoice:(Boolean)->Unit,onMusicEnabled:(Boolean)->Unit,onMusicVolume:(Int)->Unit,onSoundEffects:(Boolean)->Unit,
+    onPcmVoice:(Boolean)->Unit,onShowPinyin:(Boolean)->Unit,
+    onMusicEnabled:(Boolean)->Unit,onMusicVolume:(Int)->Unit,onSoundEffects:(Boolean)->Unit,
     onVoicePreview:()->Unit
 ) {
     val feedback=LocalKidFeedback.current
     StoryCard(Modifier.fillMaxWidth(),Color(0xFFFFF4DF)) {
+        TitleLine("🔤 汉字拼音")
+        SettingToggle("显示拼音","开启后，游戏界面的汉字上方显示带声调的拼音；关闭时保持原有文字排版。",showPinyin) {
+            feedback?.tap()
+            onShowPinyin(it)
+        }
+        PinyinText(if(showPinyin) "示例：春眠不觉晓" else "示例：春眠不觉晓",
+            fontSize=16.sp,color=Ink,fontWeight=FontWeight.Bold)
         TitleLine("🎵 声音与触感")
         SettingToggle("🎼 背景音乐","沿用数学星球原创旋律，朗读时暂停、结束后恢复",musicEnabled) {
             feedback?.tap()
             onMusicEnabled(it)
         }
         if(musicEnabled) {
-            Text("🎚️ 音乐音量 ${musicVolume}%",color=Ink,fontSize=14.sp,
+            PinyinText("🎚️ 音乐音量 ${musicVolume}%",color=Ink,fontSize=14.sp,
                 fontWeight=FontWeight.Bold)
             FlowRow(horizontalArrangement=Arrangement.spacedBy(6.dp)) {
                 listOf(0,25,50,75,100).forEach { volume ->
@@ -220,7 +228,7 @@ private fun InteractionSettings(
             feedback?.tap()
             onPcmVoice(it)
         }
-        Text(voiceStatus,color=Ink.copy(alpha=.78f),fontSize=13.sp)
+        PinyinText(voiceStatus,color=Ink.copy(alpha=.78f),fontSize=13.sp)
         KidLink(if(voiceReady) "▶ 试听中文语音" else "设备中文语音不可用",
             onVoicePreview,enabled=voiceReady)
     }
@@ -234,10 +242,10 @@ private fun SettingToggle(title:String,desc:String,selected:Boolean,onChange:(Bo
             .padding(horizontal=13.dp,vertical=12.dp),
         verticalAlignment=Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
-            Text(title,color=Ink,fontSize=16.sp,fontWeight=FontWeight.Black)
-            Text(desc,color=Ink.copy(alpha=.72f),fontSize=12.sp)
+            PinyinText(title,color=Ink,fontSize=16.sp,fontWeight=FontWeight.Black)
+            PinyinText(desc,color=Ink.copy(alpha=.72f),fontSize=12.sp)
         }
-        Text(if(selected) "🟢 开" else "⚪ 关",color=Ink,
+        PinyinText(if(selected) "🟢 开" else "⚪ 关",color=Ink,
             fontSize=14.sp,fontWeight=FontWeight.ExtraBold)
     }
 }

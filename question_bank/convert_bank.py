@@ -102,6 +102,8 @@ def main():
     # merge them again or the first/second-grade literature disappears.
     from runpy import run_path
     run_path(str(BASE/"merge_poetry_source.py"))
+    run_path(str(BASE/"merge_poster_poetry.py"))
+    run_path(str(BASE/"build_cantonese_bank.py"))
     (BASE/"judgment_conversions.json").write_text(json.dumps(conversions,ensure_ascii=False,indent=2),encoding="utf-8")
     (BASE/"review_mismatches.json").unlink(missing_ok=True)
     print(json.dumps({"judgment_to_four_choice_conversions":len(conversions),"unexpected_differences":0,"questions":len(parsed),"grades":dict(sorted(Counter(q["grade"] for q in parsed).items())),

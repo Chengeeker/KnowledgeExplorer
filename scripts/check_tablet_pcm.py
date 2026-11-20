@@ -35,7 +35,11 @@ assert "setSampleRate(SpeechPcm.OUTPUT_HZ)" in player
 assert "runCatching {track?.release()}" in player
 assert "import android.media.AudioTrack" not in pcm # software-only conversion
 assert screens.count("ResponsiveWindowPolicy.tabletLandscape(")>=4
-assert "MainModeTile(" in home and ".fillMaxHeight()" in home
+assert "MainModeTile(" in home
+# Four balanced home cards replace the old three weighted full-height cards
+# and the separate 11dp high Cantonese ribbon.
+assert home.count("Modifier.weight(1f).heightIn(min=if(reading) 174.dp else 150.dp)")==4
+assert 'MainModeTile("🦁","粤语乐园"' in home
 assert "TabletStudyBody(" in screens and "TabletChallengeBody(" in screens
 assert ".weight(1f)" in layouts and ".verticalScroll(rememberScrollState())" in layouts
 assert ".fillMaxHeight()" in screens

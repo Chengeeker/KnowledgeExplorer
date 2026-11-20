@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.material3.Text
 import androidx.compose.ui.window.Dialog
 
 /** Math Planet's illustrated modal language, without Material AlertDialog UI. */
@@ -40,14 +39,14 @@ fun KidExitDialog(isExitApp: Boolean, onStay: () -> Unit, onConfirm: () -> Unit)
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(if (compact) 9.dp else 13.dp)
         ) {
-            Text("✨ 万象探险家 ✨", color = Sea, fontWeight = FontWeight.Black)
-            Text(if (isExitApp) "🧳" else "🦊", fontSize = if (compact) 57.sp else 76.sp)
-            Text(
+            PinyinText("✨ 万象探险家 ✨", color = Sea, fontWeight = FontWeight.Black)
+            PinyinText(if (isExitApp) "🧳" else "🦊", fontSize = if (compact) 57.sp else 76.sp)
+            PinyinText(
                 if (isExitApp) "今天先探索到这里吗？" else "还要继续探索吗？",
                 fontSize = if (compact) 22.sp else 25.sp,
                 color = Ink, fontWeight = FontWeight.Black, textAlign = TextAlign.Center
             )
-            Text(
+            PinyinText(
                 if (isExitApp) "学到的新知识会留在心里，下次继续探险！"
                 else "现在返回首页，会结束这一轮学习或对决，未完成的进度不会保留。",
                 fontSize = 15.sp, lineHeight = 23.sp,

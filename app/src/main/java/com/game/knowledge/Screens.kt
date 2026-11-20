@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -20,87 +21,117 @@ import android.os.SystemClock
 import kotlinx.coroutines.delay
 
 @Composable
-fun HomeScreen(total:Int,played:Int,scopeSummary:String,onStudy:()->Unit,onQuiz:()->Unit,onDuel:()->Unit,onSettings:()->Unit) {
+fun HomeScreen(total:Int,played:Int,scopeSummary:String,onStudy:()->Unit,onQuiz:()->Unit,onDuel:()->Unit,onCantonese:()->Unit,onSettings:()->Unit) {
+    val feedback=LocalKidFeedback.current
+    val reading=LocalShowPinyin.current
     BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding()) {
         val tabletLandscape=ResponsiveWindowPolicy.tabletLandscape(maxWidth.value,maxHeight.value)
         if(tabletLandscape){
-            Column(Modifier.fillMaxSize().padding(horizontal=23.dp,vertical=16.dp),
-                verticalArrangement=Arrangement.spacedBy(15.dp)) {
+            // Ruby almost doubles text height. In landscape allow the home to
+            // scroll rather than forcing four game entries into fixed heights.
+            Column(Modifier.fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal=23.dp,vertical=if(reading) 11.dp else 16.dp),
+                verticalArrangement=Arrangement.spacedBy(if(reading) 10.dp else 15.dp)) {
                 Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
                     Column(Modifier.weight(1f)) {
-                        Text("🔎 万象探险家",fontSize=34.sp,
+                        PinyinText("🔎 万象探险家",fontSize=if(reading) 27.sp else 34.sp,
                             fontWeight=FontWeight.Black,color=Ink)
-                        Text("在好奇心里，发现整个世界！",fontSize=15.sp,
+                        PinyinText("在好奇心里，发现整个世界！",fontSize=if(reading) 12.sp else 15.sp,
                             color=Sea,fontWeight=FontWeight.Bold)
                     }
                     KidPill("⚙️ 设置",onSettings)
                 }
                 Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(14.dp)){
                     StoryCard(Modifier.weight(1f),Color(0xFFE1F6E9)){
-                        Text("📖 百科探索地图",fontSize=20.sp,color=Ink,
+                        PinyinText("📖 百科探索地图",fontSize=if(reading) 17.sp else 20.sp,color=Ink,
                             fontWeight=FontWeight.Black)
-                        Text("离线收录 $total 道趣味知识 · 已完成 $played 轮闯关",
-                            fontSize=14.sp,color=Ink)
+                        PinyinText("离线收录 $total 道趣味知识 · 已完成 $played 轮闯关",
+                            fontSize=if(reading) 12.sp else 14.sp,color=Ink)
                     }
                     StoryCard(Modifier.weight(1f),Color(0xFFFFFAED)){
                         Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically){
                             Column(Modifier.weight(1f)){
-                                Text("🎯 当前题目范围",fontSize=17.sp,
+                                PinyinText("🎯 当前题目范围",fontSize=if(reading) 15.sp else 17.sp,
                                     color=Ink,fontWeight=FontWeight.Black)
-                                Text(scopeSummary,fontSize=13.sp,color=Ink)
+                                PinyinText(scopeSummary,fontSize=if(reading) 11.sp else 13.sp,color=Ink)
                             }
                             KidPill("修改",onSettings)
                         }
                     }
                 }
-                Text("🌈 选择你的探险模式",color=Ink,
-                    fontSize=21.sp,fontWeight=FontWeight.Black)
-                Row(Modifier.fillMaxWidth().weight(1f),
-                    horizontalArrangement=Arrangement.spacedBy(15.dp)){
+                PinyinText("🌈 选择你的探险模式",color=Ink,
+                    fontSize=if(reading) 18.sp else 21.sp,fontWeight=FontWeight.Black)
+                // Four equally prominent game entries: 2×2 tablet grid.
+                // The previous three-card weighted row used nearly all height
+                // and squeezed Cantonese into a tiny ribbon underneath.
+                Row(Modifier.fillMaxWidth(),
+                    horizontalArrangement=Arrangement.spacedBy(12.dp)) {
                     MainModeTile("🌿","科普小课堂","自由探索知识，3 秒后揭晓答案",
-                        Color(0xFFD5F5DE),onStudy,Modifier.weight(1f).fillMaxHeight(),
+                        Color(0xFFD5F5DE),onStudy,
+                        Modifier.weight(1f).heightIn(min=if(reading) 174.dp else 150.dp),
                         tablet=true)
                     MainModeTile("🏆","知识大闯关","四选一闯关，每题都能学到新知识",
-                        Color(0xFFFFECD0),onQuiz,Modifier.weight(1f).fillMaxHeight(),
-                        tablet=true)
-                    MainModeTile("⚔️","知识对决","平板双人同屏 PK，或挑战四档 AI",
-                        Color(0xFFDDECFB),onDuel,Modifier.weight(1f).fillMaxHeight(),
+                        Color(0xFFFFECD0),onQuiz,
+                        Modifier.weight(1f).heightIn(min=if(reading) 174.dp else 150.dp),
                         tablet=true)
                 }
-                Text("所有模式使用同一套离线百科题库，无需联网。",
-                    fontSize=13.sp,color=Ink.copy(alpha=.72f))
+                Row(Modifier.fillMaxWidth(),
+                    horizontalArrangement=Arrangement.spacedBy(12.dp)) {
+                    MainModeTile("⚔️","知识对决","平板双人同屏 PK，或挑战四档 AI",
+                        Color(0xFFDDECFB),onDuel,
+                        Modifier.weight(1f).heightIn(min=if(reading) 174.dp else 150.dp),
+                        tablet=true)
+                    MainModeTile("🦁","粤语乐园","听粤语、对话闯关、广东文化和小游戏",
+                        Color(0xFFF1E5FF),onCantonese,
+                        Modifier.weight(1f).heightIn(min=if(reading) 174.dp else 150.dp),
+                        tablet=true)
+                }
+                PinyinText("所有模式使用同一套离线百科题库，无需联网。",
+                    fontSize=if(reading) 11.sp else 13.sp,color=Ink.copy(alpha=.72f))
             }
         } else {
         val wide=maxWidth>=680.dp
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .padding(horizontal=if(wide) 28.dp else 18.dp,vertical=18.dp),
-            verticalArrangement=Arrangement.spacedBy(16.dp)) {
+            .padding(horizontal=if(wide) 28.dp else 18.dp,
+                vertical=if(reading) 11.dp else 18.dp),
+            verticalArrangement=Arrangement.spacedBy(if(reading) 11.dp else 16.dp)) {
             Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text("🔎 万象探险家",fontSize=if(wide) 36.sp else 29.sp,
+                    PinyinText("🔎 万象探险家",fontSize=when {
+                            reading && wide -> 27.sp
+                            reading -> 24.sp
+                            wide -> 36.sp
+                            else -> 29.sp
+                        },
                         fontWeight=FontWeight.Black,color=Ink)
-                    Text("在好奇心里，发现整个世界！",fontSize=16.sp,color=Sea,fontWeight=FontWeight.Bold)
+                    PinyinText("在好奇心里，发现整个世界！",
+                        fontSize=if(reading) 12.sp else 16.sp,color=Sea,fontWeight=FontWeight.Bold)
                 }
                 KidPill("⚙️ 设置",onSettings)
             }
             StoryCard(Modifier.fillMaxWidth(),tint=Color(0xFFE1F6E9)) {
                 Row(verticalAlignment=Alignment.CenterVertically,
                     horizontalArrangement=Arrangement.spacedBy(10.dp)) {
-                    Text("📖",fontSize=46.sp)
-                    Column {
-                        Text("百科探索地图",fontSize=21.sp,fontWeight=FontWeight.Black,color=Ink)
-                        Text("离线收录 $total 道趣味知识 · 已完成 $played 轮闯关",
-                            fontSize=14.sp,color=Ink)
-                        Text("动物 · 自然 · 地理 · 文化 · 科技 · 生活",
-                            fontSize=13.sp,color=Sea)
+                    PinyinText("📖",fontSize=if(reading) 34.sp else 46.sp)
+                    Column(Modifier.weight(1f)) {
+                        PinyinText("百科探索地图",
+                            fontSize=if(reading) 18.sp else 21.sp,
+                            fontWeight=FontWeight.Black,color=Ink)
+                        PinyinText("离线收录 $total 道趣味知识 · 已完成 $played 轮闯关",
+                            fontSize=if(reading) 12.sp else 14.sp,color=Ink)
+                        PinyinText("动物 · 自然 · 地理 · 文化 · 科技 · 生活",
+                            fontSize=if(reading) 11.sp else 13.sp,color=Sea)
                     }
                 }
             }
             StoryCard(Modifier.fillMaxWidth(),tint=Color(0xFFFFFAED)) {
                 Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
                     Column(Modifier.weight(1f)) {
-                        Text("🎯 当前题目范围",color=Ink,fontWeight=FontWeight.Black,fontSize=16.sp)
-                        Text(scopeSummary,color=Ink.copy(alpha=.78f),fontSize=13.sp)
+                        PinyinText("🎯 当前题目范围",color=Ink,fontWeight=FontWeight.Black,
+                            fontSize=if(reading) 14.sp else 16.sp)
+                        PinyinText(scopeSummary,color=Ink.copy(alpha=.78f),
+                            fontSize=if(reading) 11.sp else 13.sp)
                     }
                     KidPill("修改",onSettings)
                 }
@@ -120,7 +151,10 @@ fun HomeScreen(total:Int,played:Int,scopeSummary:String,onStudy:()->Unit,onQuiz:
             }
             MainModeTile("⚔️","知识对决","平板双人同屏 PK，或者挑战四档 AI",
                 Color(0xFFDDECFB),onDuel,Modifier.fillMaxWidth())
-            Text("所有模式使用相同的百科题库，游戏无需联网。",fontSize=13.sp,
+            MainModeTile("🦁","粤语乐园","听粤语、点心小掌柜、词语宝典与自愿跟读",
+                Color(0xFFF1E5FF),onCantonese,Modifier.fillMaxWidth())
+            PinyinText("所有模式使用相同的百科题库，游戏无需联网。",
+                fontSize=if(reading) 11.sp else 13.sp,
                 color=Ink.copy(alpha=.75f),modifier=Modifier.padding(bottom=10.dp))
         }
 
@@ -132,16 +166,36 @@ private fun MainModeTile(emoji:String,title:String,subtitle:String,
                          color:Color,onClick:()->Unit,modifier:Modifier,
                          tablet:Boolean=false) {
     val feedback=LocalKidFeedback.current
+    val reading=LocalShowPinyin.current
     StoryCard(modifier.clickable {feedback?.tap();onClick()},color) {
-        Row(Modifier.fillMaxWidth().then(if(tablet) Modifier.fillMaxHeight() else Modifier),
-            verticalAlignment=Alignment.CenterVertically,
-            horizontalArrangement=Arrangement.spacedBy(12.dp)) {
-            Text(emoji,fontSize=if(tablet) 55.sp else 48.sp,modifier=Modifier.width(65.dp),textAlign=TextAlign.Center)
-            Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(5.dp)) {
-                Text(title,color=Ink,fontSize=23.sp,fontWeight=FontWeight.Black)
-                Text(subtitle,color=Ink,fontSize=14.sp,lineHeight=20.sp)
+        if(tablet && reading) {
+            Column(Modifier.fillMaxWidth().padding(vertical=2.dp),
+                horizontalAlignment=Alignment.CenterHorizontally,
+                verticalArrangement=Arrangement.spacedBy(3.dp)) {
+                PinyinText(emoji,fontSize=36.sp,textAlign=TextAlign.Center)
+                PinyinText(title,color=Ink,fontSize=18.sp,
+                    fontWeight=FontWeight.Black,textAlign=TextAlign.Center)
+                PinyinText(subtitle,color=Ink,fontSize=11.sp,
+                    maxLines=4,textAlign=TextAlign.Center)
             }
-            Text("›",fontSize=32.sp,color=Sea,fontWeight=FontWeight.Black)
+        } else {
+            Row(Modifier.fillMaxWidth(),
+                verticalAlignment=Alignment.CenterVertically,
+                horizontalArrangement=Arrangement.spacedBy(if(reading) 8.dp else 12.dp)) {
+                PinyinText(emoji,fontSize=if(tablet) 55.sp else if(reading) 35.sp else 48.sp,
+                    modifier=Modifier.width(if(reading) 43.dp else 65.dp),
+                    textAlign=TextAlign.Center)
+                Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(5.dp)) {
+                    PinyinText(title,color=Ink,
+                        fontSize=if(reading) 19.sp else 23.sp,
+                        fontWeight=FontWeight.Black)
+                    PinyinText(subtitle,color=Ink,
+                        fontSize=if(reading) 12.sp else 14.sp,
+                        lineHeight=if(reading) 19.sp else 20.sp)
+                }
+                PinyinText("›",fontSize=if(reading) 23.sp else 32.sp,
+                    color=Sea,fontWeight=FontWeight.Black)
+            }
         }
     }
 }
@@ -213,21 +267,21 @@ private fun StudyBody(q:KnowledgeQuestion,reveal:Boolean,narrator:MandarinNarrat
                       onNext:()->Unit,onPrevious:()->Unit,hasPrevious:Boolean,
                       modifier:Modifier) {
     StoryCard(modifier) {
-        Text("🌟 ${q.grade}年级 · ${q.domain} · ${q.topic}",fontSize=13.sp,
+        PinyinText("🌟 ${q.grade}年级 · ${q.domain} · ${q.topic}",fontSize=13.sp,
             color=Sea,fontWeight=FontWeight.Bold)
-        Text(q.question,fontSize=24.sp,lineHeight=33.sp,color=Ink,
+        PinyinText(q.question,fontSize=24.sp,lineHeight=33.sp,color=Ink,
             fontWeight=FontWeight.Black)
         if(reveal) {
             HorizontalDivider(color=Color(0xFFD2E8DB))
-            Text("原来答案是……",fontSize=16.sp,color=Sea,fontWeight=FontWeight.Bold)
-            Text(q.answer,fontSize=27.sp,color=Ink,fontWeight=FontWeight.Black)
+            PinyinText("原来答案是……",fontSize=16.sp,color=Sea,fontWeight=FontWeight.Bold)
+            PinyinText(q.answer,fontSize=27.sp,color=Ink,fontWeight=FontWeight.Black)
             if(q.explanation.isNotBlank())
-                Text(q.explanation,fontSize=17.sp,color=Ink,lineHeight=26.sp)
+                PinyinText(q.explanation,fontSize=17.sp,color=Ink,lineHeight=26.sp)
             KidLink("🔊 听答案和解释",{narrator.say(q.answer+"。"+q.explanation)},
                 enabled=narrator.ready)
             LargeAction("继续探索 →",onNext,Modifier.fillMaxWidth(),Coral)
         } else {
-            Text(
+            PinyinText(
                 if(waitSeconds>0) "🧠 先观察和思考，${waitSeconds} 秒后再揭晓答案"
                 else "✨ 思考时间到了，看看你猜得对不对！",
                 fontSize=14.sp,color=Ink,fontWeight=FontWeight.Bold
@@ -326,9 +380,9 @@ private fun ChallengeBody(q:KnowledgeQuestion,options:List<String>,choice:String
                           narrator:MandarinNarrator,startedAt:Long,waitSeconds:Long,
                           modifier:Modifier,onChoose:(String)->Unit,onNext:()->Unit) {
     StoryCard(modifier) {
-        Text("${q.grade}年级 · ${q.domain} · ${q.topic}",fontSize=13.sp,color=Sea,
+        PinyinText("${q.grade}年级 · ${q.domain} · ${q.topic}",fontSize=13.sp,color=Sea,
             fontWeight=FontWeight.Bold)
-        Text(q.question,color=Ink,fontSize=22.sp,lineHeight=30.sp,fontWeight=FontWeight.Black)
+        PinyinText(q.question,color=Ink,fontSize=22.sp,lineHeight=30.sp,fontWeight=FontWeight.Black)
         options.chunked(2).forEach { pair ->
             Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(9.dp)) {
                 pair.forEach { option ->
@@ -341,18 +395,18 @@ private fun ChallengeBody(q:KnowledgeQuestion,options:List<String>,choice:String
             }
         }
         if(choice!=null) {
-            Text(if(choice==q.answer) "✅ 答对啦！" else "🌱 学到新知识啦！",
+            PinyinText(if(choice==q.answer) "✅ 答对啦！" else "🌱 学到新知识啦！",
                 color=Sea,fontSize=19.sp,fontWeight=FontWeight.Black)
-            Text("正确答案：${q.answer}",fontSize=17.sp,fontWeight=FontWeight.Bold,color=Ink)
+            PinyinText("正确答案：${q.answer}",fontSize=17.sp,fontWeight=FontWeight.Bold,color=Ink)
             KidLink("🔊 朗读答案和解析",{narrator.say(q.answer+"。"+q.explanation)},
                 enabled=narrator.ready)
             if(q.explanation.isNotBlank())
-                Text(q.explanation,fontSize=15.sp,color=Ink,lineHeight=22.sp)
+                PinyinText(q.explanation,fontSize=15.sp,color=Ink,lineHeight=22.sp)
             LargeAction("下一题 →",onNext,Modifier.fillMaxWidth(),Coral)
         } else {
-            Text("选择你认为正确的答案",fontSize=13.sp,color=Ink.copy(alpha=.75f))
+            PinyinText("选择你认为正确的答案",fontSize=13.sp,color=Ink.copy(alpha=.75f))
             KidLink("🔊 朗读题目",{narrator.say(q.question)},enabled=narrator.ready)
-            Text(
+            PinyinText(
                 if(waitSeconds>0) "🧠 再想想：${waitSeconds} 秒后才可以跳过；四个选项现在就能作答。"
                 else "想不出来也没关系，可以跳过并认真看看解析。",
                 fontSize=13.sp,color=Ink.copy(alpha=.8f))
@@ -374,16 +428,16 @@ fun ResultPage(title:String,details:String,onBack:()->Unit,onAgain:()->Unit,agai
                 horizontalArrangement=Arrangement.spacedBy(22.dp)){
                 StoryCard(Modifier.weight(.85f).fillMaxHeight(),PaleMint){
                     Box(Modifier.fillMaxSize(),contentAlignment=Alignment.Center){
-                        Text("🌻",fontSize=145.sp)
+                        PinyinText("🌻",fontSize=145.sp)
                     }
                 }
                 StoryCard(Modifier.weight(1.15f).fillMaxHeight()){
                     Column(Modifier.fillMaxSize(),
                         horizontalAlignment=Alignment.CenterHorizontally,
                         verticalArrangement=Arrangement.SpaceEvenly){
-                        Text(title,fontSize=32.sp,fontWeight=FontWeight.Black,
+                        PinyinText(title,fontSize=32.sp,fontWeight=FontWeight.Black,
                             color=Ink,textAlign=TextAlign.Center)
-                        Text(details,fontSize=21.sp,color=Ink,
+                        PinyinText(details,fontSize=21.sp,color=Ink,
                             textAlign=TextAlign.Center)
                         LargeAction(againLabel,onAgain,Modifier.fillMaxWidth(),Coral)
                         KidPill("🏠 返回首页",onBack,Modifier.fillMaxWidth())
@@ -394,9 +448,9 @@ fun ResultPage(title:String,details:String,onBack:()->Unit,onAgain:()->Unit,agai
             Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())
                 .padding(23.dp),horizontalAlignment=Alignment.CenterHorizontally,
                 verticalArrangement=Arrangement.spacedBy(18.dp)) {
-                Text("🌻",fontSize=90.sp)
-                Text(title,fontSize=30.sp,fontWeight=FontWeight.Black,color=Ink)
-                Text(details,fontSize=18.sp,color=Ink,textAlign=TextAlign.Center)
+                PinyinText("🌻",fontSize=90.sp)
+                PinyinText(title,fontSize=30.sp,fontWeight=FontWeight.Black,color=Ink)
+                PinyinText(details,fontSize=18.sp,color=Ink,textAlign=TextAlign.Center)
                 LargeAction(againLabel,onAgain,Modifier.fillMaxWidth(),Coral)
                 KidLink("返回首页",onBack)
             }

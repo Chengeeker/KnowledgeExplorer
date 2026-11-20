@@ -35,9 +35,11 @@ class KidFeedback(context: Context, private val audio: WorldAudio) {
         }
     }
 
-    fun tap() = pulse(14)
-    fun success() = pulse(35)
-    fun error() = pulse(38, double = true)
+    // Sounds and vibration are independent user preferences: WorldAudio
+    // honors the effects switch; pulse honors the haptics switch.
+    fun tap() {pulse(14);audio.tap()}
+    fun success() {pulse(35);audio.success()}
+    fun error() {pulse(38,double=true);audio.retry()}
 }
 
 val LocalKidFeedback = compositionLocalOf<KidFeedback?> { null }

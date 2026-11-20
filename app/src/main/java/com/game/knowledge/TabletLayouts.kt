@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,19 +27,19 @@ internal fun TabletStudyBody(
         Column(Modifier.fillMaxWidth().weight(1f)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement=Arrangement.spacedBy(13.dp)) {
-            Text("🌟 ${q.grade}年级 · ${q.domain} · ${q.topic}",
+            PinyinText("🌟 ${q.grade}年级 · ${q.domain} · ${q.topic}",
                 color=Sea,fontWeight=FontWeight.ExtraBold,fontSize=15.sp)
-            Text(q.question,color=Ink,fontWeight=FontWeight.Black,
+            PinyinText(q.question,color=Ink,fontWeight=FontWeight.Black,
                 fontSize=28.sp,lineHeight=38.sp)
             if(reveal){
                 HorizontalDivider(color=Color(0xFFD2E8DB))
-                Text("💡 原来是这样！",color=Sea,
+                PinyinText("💡 原来是这样！",color=Sea,
                     fontSize=19.sp,fontWeight=FontWeight.Black)
-                Text(q.answer,color=Ink,fontSize=30.sp,
+                PinyinText(q.answer,color=Ink,fontSize=30.sp,
                     fontWeight=FontWeight.Black)
-                Text(q.explanation,color=Ink,fontSize=17.sp,lineHeight=26.sp)
+                PinyinText(q.explanation,color=Ink,fontSize=17.sp,lineHeight=26.sp)
             } else {
-                Text(
+                PinyinText(
                     if(waitSeconds>0) "🧠 观察插画，先猜一猜。还有 ${waitSeconds} 秒就能揭晓。"
                     else "✨ 现在可以揭晓答案啦！",
                     color=Ink,fontSize=17.sp,lineHeight=25.sp)
@@ -76,22 +75,22 @@ internal fun TabletChallengeBody(
     onChoose:(String)->Unit,onNext:()->Unit,modifier:Modifier
 ) {
     StoryCard(modifier,Color.White) {
-        Text("🎯 ${q.grade}年级 · ${q.domain} · ${q.topic}",
+        PinyinText("🎯 ${q.grade}年级 · ${q.domain} · ${q.topic}",
             color=Sea,fontSize=15.sp,fontWeight=FontWeight.ExtraBold)
         Column(Modifier.fillMaxWidth().weight(1f)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement=Arrangement.spacedBy(9.dp)) {
-            Text(q.question,color=Ink,fontWeight=FontWeight.Black,
+            PinyinText(q.question,color=Ink,fontWeight=FontWeight.Black,
                 fontSize=26.sp,lineHeight=35.sp)
             if(choice!=null) {
                 HorizontalDivider(color=Color(0xFFD2E8DB))
-                Text(if(choice==q.answer) "✅ 回答正确！" else "🌱 又学到新知识了！",
+                PinyinText(if(choice==q.answer) "✅ 回答正确！" else "🌱 又学到新知识了！",
                     color=Sea,fontSize=20.sp,fontWeight=FontWeight.Black)
-                Text("正确答案：${q.answer}",fontSize=18.sp,
+                PinyinText("正确答案：${q.answer}",fontSize=18.sp,
                     color=Ink,fontWeight=FontWeight.Black)
-                Text("💡 ${q.explanation}",color=Ink,fontSize=16.sp,lineHeight=23.sp)
+                PinyinText("💡 ${q.explanation}",color=Ink,fontSize=16.sp,lineHeight=23.sp)
             } else {
-                Text("请选择正确答案；答题不需要等待倒计时。",
+                PinyinText("请选择正确答案；答题不需要等待倒计时。",
                     fontSize=14.sp,color=Ink.copy(alpha=.75f))
             }
         }
