@@ -182,9 +182,8 @@ internal class BufferedSpeechPlayer {
             "PCM backend failed, stream="+stream,it) }.getOrDefault(false)
 
     /**
-     * A reused STOPPED + FLUSHED AudioTrack is prepared with 1350ms of
-     * samples before play(), while the remaining data is written on a high
-     * priority serial worker. The track stays allocated after the phrase.
+     * Feed arbitrary-length TTS speech via nonblocking PCM chunks so a stalled
+     * Android audio mixer cannot freeze the only speech worker.
      */
     private fun playBuffered(data:ByteArray,token:Int,onStarted:()->Unit):Boolean {
         if(!current(token)) return false
@@ -193,46 +192,62 @@ internal class BufferedSpeechPlayer {
         val prefill=TabletPcmPolicy.prefillBytes(bufferBytes,data.size)
         val initialUnderruns=track.underrunCount
         var broken=false
+        var written=0
         val start=SystemClock.uptimeMillis()
         try {
             track.setVolume(1f)
-            var written=0
+            // Bound prefill time instead of risking an indefinite blocking call.
+            val fillDeadline=SystemClock.uptimeMillis()+350L
             while(written<prefill && current(token)){
-                val n=track.write(data,written,prefill-written,AudioTrack.WRITE_BLOCKING)
-                check(n>0) {"PCM prefill write failed: "+n}
+                val size=minOf(32_768,prefill-written)
+                val n=track.write(data,written,size,AudioTrack.WRITE_NON_BLOCKING)
+                check(n>=0) {"PCM prefill failed: "+n}
                 written+=n
+                if(n==0) {
+                    if(SystemClock.uptimeMillis()>=fillDeadline) break
+                    Thread.sleep(5L)
+                }
             }
             if(!current(token)) return false
-            val headBefore=track.playbackHeadPosition.toLong() and 0xffffffffL
+            check(written>0) {"PCM prefill wrote no frames"}
             track.play()
             onStarted()
             val playedAt=SystemClock.uptimeMillis()
-            while(written<data.size && current(token)){
-                val chunk=minOf(32_768,data.size-written)
-                val n=track.write(data,written,chunk,AudioTrack.WRITE_BLOCKING)
-                check(n>0) {"PCM streaming write failed: "+n}
-                written+=n
-            }
-            if(!current(token) || written!=data.size) return false
+            var lastProgressAt=playedAt
+            val progress=SpeechPlaybackHead(track.playbackHeadPosition.toLong())
             val frames=data.size/TabletPcmPolicy.FRAME_BYTES.toLong()
-            val deadline=playedAt+frames*1000L/SpeechPcm.OUTPUT_HZ+2500L
-            while(current(token) && SystemClock.uptimeMillis()<deadline){
-                val head=((track.playbackHeadPosition.toLong() and 0xffffffffL) -
-                    headBefore) and 0xffffffffL
-                if(head >= (frames-240L).coerceAtLeast(0L)){
-                    Log.i(tag,"Stream OK, reused track, prefill="+prefill+
-                        " buffer="+bufferBytes+" playedMs="+
-                        (SystemClock.uptimeMillis()-playedAt)+" totalMs="+
-                        (SystemClock.uptimeMillis()-start)+" underruns="+
-                        (track.underrunCount-initialUnderruns))
+            val deadline=playedAt+frames*1000L/SpeechPcm.OUTPUT_HZ+4000L
+            while(current(token)){
+                val now=SystemClock.uptimeMillis()
+                if(progress.observe(track.playbackHeadPosition.toLong())) {
+                    lastProgressAt=now
+                }
+                if(written<data.size) {
+                    val chunk=minOf(16_384,data.size-written)
+                    val n=track.write(data,written,chunk,AudioTrack.WRITE_NON_BLOCKING)
+                    check(n>=0) {"PCM nonblocking write failed: "+n}
+                    written+=n
+                }
+                if(written==data.size &&
+                    progress.playedFrames >= (frames-240L).coerceAtLeast(0L)){
+                    Log.i(tag,"PCM completed request="+token+" playedMs="+(now-playedAt)+
+                        " totalMs="+(now-start)+" durationMs="+
+                        (frames*1000L/SpeechPcm.OUTPUT_HZ)+" bytes="+data.size+
+                        " underruns="+(track.underrunCount-initialUnderruns)+
+                        " counterResets="+progress.counterResets)
                     return true
                 }
-                Thread.sleep(20L)
-            }
-            if(current(token)){
-                broken=true
-                Log.w(tag,"Stream timed out, frames="+frames+
-                    " head="+track.playbackHeadPosition)
+                if(now-lastProgressAt>1500L || now>deadline){
+                    broken=true
+                    Log.e(tag,"PCM watchdog request="+token+
+                        " written="+written+"/"+data.size+
+                        " playedFrames="+progress.playedFrames+"/"+frames+
+                        " idleMs="+(now-lastProgressAt)+
+                        " underruns="+(track.underrunCount-initialUnderruns)+
+                        " counterResets="+progress.counterResets)
+                    return false
+                }
+                Thread.sleep(10L)
             }
             return false
         } catch(e:Exception) {
@@ -247,12 +262,13 @@ internal class BufferedSpeechPlayer {
             if(!current(token) && track.playState==AudioTrack.PLAYSTATE_PLAYING){
                 runCatching {track.setVolume(.35f);Thread.sleep(10L)}
             }
-            val stopped=runCatching {
-                if(track.playState!=AudioTrack.PLAYSTATE_STOPPED) track.stop()
+            // Discard unfinished words before stopping the reused stream.
+            val paused=runCatching {
+                if(track.playState==AudioTrack.PLAYSTATE_PLAYING) track.pause()
             }.isSuccess
             val flushed=runCatching {track.flush()}.isSuccess
-            // Recovery from a broken vendor route discards only the bad track.
-            if(broken || !stopped || !flushed || closed) releaseShared()
+            val stopped=runCatching {track.stop()}.isSuccess
+            if(broken || !paused || !flushed || !stopped || closed) releaseShared()
         }
     }
 

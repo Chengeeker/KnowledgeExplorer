@@ -121,15 +121,38 @@ class KnowledgeGameTest {
         assertEquals(listOf("judgment"),KnowledgeBank.matching(list,
             QuestionFilter(grade=-1,kind="判断题")).map { it.id })
     }
+    @Test fun speedRaceNoticeMatchesMathPlanetForBothSeats() {
+        assertEquals("⚡ 先答对者得分",DuelRaceNotice.forSide(true,-1,0))
+        assertEquals("⚡ 先答对者得分",DuelRaceNotice.forSide(true,-1,1))
+        assertEquals("✅ 你抢答成功！",DuelRaceNotice.forSide(true,0,0))
+        assertEquals("⚡ 对方已抢答成功！",DuelRaceNotice.forSide(true,0,1))
+        assertEquals("✅ 你抢答成功！",DuelRaceNotice.forSide(true,1,1))
+        assertEquals("⚡ 对方已抢答成功！",DuelRaceNotice.forSide(true,1,0))
+    }
+
+    @Test fun raceNoticeDoesNotLeakIntoAccuracyModeOrBeforeCorrectAnswer() {
+        for(winner in listOf(-1,0,1)) {
+            for(side in 0..1) {
+                assertEquals("",DuelRaceNotice.forSide(false,winner,side))
+            }
+        }
+        // Wrong answers keep raceWinner=-1, so no victory is announced.
+        assertFalse(DuelRaceNotice.forSide(true,-1,1).contains("抢答成功"))
+        assertEquals(1_650L,DuelRaceNotice.SUCCESS_DISPLAY_MS)
+    }
+
     @Test fun playersFaceTheirOwnPhysicalTabletEdges() {
         assertEquals(90f,DuelSeatLayout.rotationFor(0))
         assertEquals(-90f,DuelSeatLayout.rotationFor(1))
     }
-    @Test fun musicDucksDuringMandarinNarrationAndStopsInBackground() {
+    @Test fun musicPausesCompletelyForNarrationAndResumesAfterward() {
         val normal=WorldMusicLevels.gain(true,55,true,false)
         val speech=WorldMusicLevels.gain(true,55,true,true)
         assertTrue(normal>0f)
-        assertTrue(speech>0f && speech < normal/5f)
+        // Volume ducking alone leaves MediaPlayer active on PA2373.
+        assertEquals(0f,speech)
+        assertEquals(normal,WorldMusicLevels.gain(true,55,true,false))
+        assertEquals(0f,WorldMusicLevels.gain(true,100,true,true))
         assertEquals(0f,WorldMusicLevels.gain(true,55,false,false))
         assertEquals(0f,WorldMusicLevels.gain(false,100,true,false))
         assertEquals(0f,WorldMusicLevels.gain(true,0,true,false))

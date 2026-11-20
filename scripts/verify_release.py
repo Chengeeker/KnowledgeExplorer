@@ -2,7 +2,7 @@ from pathlib import Path
 from collections import Counter
 import zipfile,json,xml.etree.ElementTree as ET,hashlib
 root=Path(r"D:\App\Game\Knowledge")
-apk=root/"KnowledgeExplorer-v0.1.8-signed.apk"
+apk=root/"KnowledgeExplorer-v0.1.10-signed.apk"
 assert apk.is_file(), "SIGNED APK MISSING"
 with zipfile.ZipFile(apk) as z:
     names=set(z.namelist())
@@ -43,7 +43,7 @@ for f in results.glob("TEST-*.xml"):
     t=ET.parse(f).getroot()
     cases.append((f.name,int(t.get("tests",0)),int(t.get("failures",0)),int(t.get("errors",0))))
 print("TEST_SUITES",cases)
-assert sum(c[1] for c in cases)>=26
+assert sum(c[1] for c in cases)>=28
 assert sum(c[2]+c[3] for c in cases)==0
 assert (root/"question_bank"/"judgment_conversions.json").is_file()
 conversions=json.loads((root/"question_bank"/"judgment_conversions.json").read_text("utf8"))
@@ -54,3 +54,16 @@ from runpy import run_path
 run_path(str(root/"scripts/check_interaction_routes.py"))
 run_path(str(root/"scripts/check_tablet_pcm.py"))
 print("JUDGMENT_TO_CHOICE_CONVERSIONS",len(conversions),"ALL_CHECKS_PASSED")
+
+
+duel=(root/'app/src/main/java/com/game/knowledge/Duel.kt').read_text(encoding='utf8')
+for expected in (
+  'DuelRaceNotice.forSide(speed,raceWinner,0)',
+  'DuelRaceNotice.forSide(speed,raceWinner,1)',
+  'if(status.isNotBlank())',
+  'delay(DuelRaceNotice.SUCCESS_DISPLAY_MS)',
+  '对方已抢答成功',
+  '你抢答成功',
+):
+    assert expected in duel, f'Missing duel race display: {expected}'
+print('RACE_NOTICES_OK both_seats=visible accuracy=unchanged')

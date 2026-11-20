@@ -11,13 +11,15 @@ import android.util.Log
 
 /**
  * Original Math Planet music/effects reused in the user's other game.
- * Keeps playback on the UI thread, pauses on app background and ducks under TTS.
+ * Keeps playback on the UI thread; pauses background music for speech and app background.
  */
 internal object WorldMusicLevels {
     fun gain(musicEnabled:Boolean,volumePercent:Int,foreground:Boolean,speaking:Boolean):Float {
         if(!foreground || !musicEnabled) return 0f
-        return (.35f * volumePercent.coerceIn(0,100)/100f *
-            (if(speaking) .16f else 1f)).coerceIn(0f,1f)
+        // PA2373 A/B/A tests: a concurrent, merely ducked MediaPlayer track
+        // stretches ~3s AudioTrack speech to ~4.2s. Stop the second stream.
+        if(speaking) return 0f
+        return (.35f * volumePercent.coerceIn(0,100)/100f).coerceIn(0f,1f)
     }
 }
 
@@ -77,13 +79,21 @@ class WorldAudio(context: Context) {
 
     private fun refresh() {
         val p = player ?: return
-        val play = foreground && musicEnabled && volumePercent > 0
+        val target = WorldMusicLevels.gain(
+            musicEnabled,volumePercent,foreground,narratorSpeaking)
+        val play = target > .001f
         if (!play) {
+            // Speech needs the audio mixer to itself. Zero volume alone does
+            // NOT remove the active MediaPlayer track from AudioFlinger.
             fadeSerial++
             currentVolume = 0f
             runCatching {
                 p.setVolume(0f, 0f)
-                if (p.isPlaying) p.pause()
+                if (p.isPlaying) {
+                    p.pause()
+                    if (narratorSpeaking)
+                        Log.i("KnowledgeMusic", "BGM paused before speech")
+                }
             }.onFailure { Log.w("KnowledgeMusic", "Pause failed", it) }
             return
         }
@@ -92,11 +102,9 @@ class WorldAudio(context: Context) {
                 currentVolume = 0f
                 p.setVolume(0f, 0f)
                 p.start()
+                Log.i("KnowledgeMusic", "BGM resumed between speech requests")
             }
-            // The music is intentionally quiet and drops below speech (not over it).
-            val target = WorldMusicLevels.gain(
-                musicEnabled,volumePercent,foreground,narratorSpeaking)
-            fadeTo(target, if (narratorSpeaking) 110L else 240L)
+            fadeTo(target, 240L)
         }.onFailure { Log.w("KnowledgeMusic", "Start failed", it) }
     }
 

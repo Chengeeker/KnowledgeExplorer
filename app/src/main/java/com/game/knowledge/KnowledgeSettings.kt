@@ -191,7 +191,7 @@ private fun InteractionSettings(
     val feedback=LocalKidFeedback.current
     StoryCard(Modifier.fillMaxWidth(),Color(0xFFFFF4DF)) {
         TitleLine("🎵 声音与触感")
-        SettingToggle("🎼 背景音乐","沿用数学星球的原创轻快旋律，朗读时自动降低音量",musicEnabled) {
+        SettingToggle("🎼 背景音乐","沿用数学星球原创旋律，朗读时暂停、结束后恢复",musicEnabled) {
             feedback?.tap()
             onMusicEnabled(it)
         }

@@ -29,6 +29,23 @@ internal object DuelSeatLayout {
     fun rotationFor(side:Int): Float = if(side==0) 90f else -90f
 }
 
+/**
+ * Match Math Planet's speed-race result feedback: only a correct answer wins
+ * the race. Both physical seats must see the result from their own viewpoint.
+ */
+internal object DuelRaceNotice {
+    const val SUCCESS_DISPLAY_MS = 1_650L
+    fun forSide(speed:Boolean,winner:Int,side:Int):String {
+        require(side==0 || side==1)
+        if(!speed) return ""
+        return when(winner) {
+            -1 -> "⚡ 先答对者得分"
+            side -> "✅ 你抢答成功！"
+            else -> "⚡ 对方已抢答成功！"
+        }
+    }
+}
+
 private data class DuelFeedback(val selected:String,val correct:Boolean)
 
 @Composable
@@ -136,7 +153,8 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
     }
     LaunchedEffect(raceWinner,raceIndex,speed) {
         if(speed && raceWinner>=0) {
-            delay(1400)
+            // Give both players enough time to read the successful-buzz notice.
+            delay(DuelRaceNotice.SUCCESS_DISPLAY_MS)
             if(raceIndex+1>=questions.size) done=true
             else {
                 raceIndex++
@@ -192,6 +210,11 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
                     Text(if(speed) "同一道题 · 第 ${raceIndex+1}/${questions.size} 题"
                         else "你的进度 ${leftIndex.coerceAtMost(questions.size)}/${questions.size} · AI ${rightIndex.coerceAtMost(questions.size)}/${questions.size}",
                         fontSize=15.sp,color=Ink,fontWeight=FontWeight.Bold)
+                    if(speed && raceWinner>=0) {
+                        Text(if(raceWinner==0) "✅ 你抢答成功！"
+                            else "⚡ AI 已抢答成功！",
+                            fontSize=19.sp,color=Ink,fontWeight=FontWeight.Black)
+                    }
                     Row(Modifier.fillMaxWidth().weight(1f),
                         horizontalArrangement=Arrangement.spacedBy(16.dp)) {
                         StoryCard(Modifier.weight(1.27f).fillMaxHeight(),Color.White) {
@@ -244,6 +267,11 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
             Text(if(speed) "同一道题 · 第 ${raceIndex+1}/${questions.size} 题"
                 else "你的进度 ${leftIndex.coerceAtMost(questions.size)}/${questions.size} · AI ${rightIndex.coerceAtMost(questions.size)}/${questions.size}",
                 fontSize=15.sp,color=Ink,fontWeight=FontWeight.Bold)
+            if(speed && raceWinner>=0) {
+                Text(if(raceWinner==0) "✅ 你抢答成功！"
+                    else "⚡ AI 已抢答成功！",
+                    fontSize=19.sp,color=Ink,fontWeight=FontWeight.Black)
+            }
             if(leftQ!=null) {
                 val reveal=speed && raceWinner>=0 || !speed && leftFeedback!=null
                 DuelQuestion(leftQ,"🔵 你的题目",leftFeedback,reveal,
@@ -291,6 +319,7 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
                             if(speed) raceIndex else leftIndex,leftFeedback,
                             if(speed) raceWinner>=0 else leftFeedback!=null,
                             if(speed) raceWinner>=0||wrongLeft else leftFeedback!=null,
+                            DuelRaceNotice.forSide(speed,raceWinner,0),
                             Modifier.weight(1f).fillMaxHeight()) {submit(0,it)}
                         DuelScoreCenter(leftScore,rightScore,questions.size,
                             if(speed) raceIndex else leftIndex,
@@ -299,6 +328,7 @@ fun DuelScreen(questions:List<KnowledgeQuestion>,vsAi:Boolean,speed:Boolean,
                             if(speed) raceIndex else rightIndex,rightFeedback,
                             if(speed) raceWinner>=0 else rightFeedback!=null,
                             if(speed) raceWinner>=0||wrongRight else rightFeedback!=null,
+                            DuelRaceNotice.forSide(speed,raceWinner,1),
                             Modifier.weight(1f).fillMaxHeight()) {submit(1,it)}
                     }
                 }
@@ -330,7 +360,7 @@ private fun DuelScoreCenter(left:Int,right:Int,total:Int,leftIndex:Int,rightInde
 @Composable
 private fun RotatedSeat(q:KnowledgeQuestion?,side:Int,total:Int,
                         index:Int,feedback:DuelFeedback?,reveal:Boolean,
-                        disabled:Boolean,modifier:Modifier,onAnswer:(String)->Unit) {
+                        disabled:Boolean,status:String,modifier:Modifier,onAnswer:(String)->Unit) {
     BoxWithConstraints(modifier.clip(RoundedCornerShape(16.dp))
         .background(if(side==0) SoftBlue else Color(0xFFFFEDDB)),
         contentAlignment=Alignment.Center) {
@@ -344,6 +374,17 @@ private fun RotatedSeat(q:KnowledgeQuestion?,side:Int,total:Int,
             verticalArrangement=Arrangement.spacedBy(8.dp)) {
             Text(if(side==0) "🔵 蓝方探险家" else "🟠 橙方探险家",
                 fontSize=16.sp,color=Ink,fontWeight=FontWeight.Black)
+            // Keep the notice OUTSIDE the independently scrollable question.
+            // A player who loses the race can always see the result at a glance.
+            if(status.isNotBlank()) {
+                Text(status,
+                    modifier=Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp))
+                        .background(Color.White.copy(alpha=.80f))
+                        .padding(horizontal=7.dp,vertical=6.dp),
+                    fontSize=if(status.contains("抢答成功")) 16.sp else 13.sp,
+                    color=Ink,fontWeight=FontWeight.Black,
+                    textAlign=TextAlign.Center)
+            }
             if(q!=null) {
                 if(logicalHeight>=440.dp) {
                     BoxWithConstraints(Modifier.fillMaxWidth().weight(1f)){
