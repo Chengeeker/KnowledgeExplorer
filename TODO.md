@@ -4,6 +4,7 @@
 - [x] 删除验证用的 App 启动 HTTP 请求，不在正式安装包内发起额外的后台 TTS 请求。
 - [x] 错误提示显示根异常类名；音频响应读取使用兼容 Android 8+ 的有界读取实现。
 - [x] 发布构建限定 arm64-v8a；APK 版本、包名、原签名和 16 KiB 对齐检查通过。
+- [x] GitHub Release 已发布：https://github.com/Chengeeker/KnowledgeExplorer/releases/tag/v0.1.29；APK 9,931,388 字节，SHA-256 `9b32bf7806e360283288633b6221ad7e0cf9f467f931b6e1117773999b1b3f74`。
 - [ ] 人耳主观验收粤语发音和 216 条社区接口的长期有效性。
 
 ## [x] v0.1.28 · 修复试听与导入说明
