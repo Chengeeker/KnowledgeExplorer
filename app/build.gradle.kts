@@ -9,6 +9,7 @@ android {
         applicationId = "com.game.knowledge"
         minSdk = 26
         targetSdk = 35
+        ndk { abiFilters += "arm64-v8a" }
         versionCode = 30
         versionName = "0.1.29"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
