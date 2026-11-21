@@ -40,8 +40,9 @@ private const val TREASURE="treasure"
 private const val DIALOGUE="dialogue"
 
 /**
- * Opt-in, game-first Cantonese learning: no forced voice scoring, no networking,
- * no upload of children's speech, and absolutely no Mandarin TTS fallback.
+ * Opt-in, game-first Cantonese learning: no forced voice scoring, no automatic
+ * network uploads, no upload of children's speech, and no Mandarin TTS fallback.
+ * No external website shortcuts or bundled example WAV files.
  */
 @Composable
 fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
@@ -136,12 +137,16 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
         prefs.edit().putInt("rounds",completed).apply()
     }
 
-    // Do not apply Mandarin pinyin to written Cantonese. Jyutping is separate.
+    // Keep page header and next action on-screen for landscape quizzes.
+    // Hub, lessons, speaking exercises and phones retain normal scrolling.
     CompositionLocalProvider(LocalShowPinyin provides false) {
-        Column(Modifier.fillMaxSize().safeDrawingPadding()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal=16.dp,vertical=12.dp),
-            verticalArrangement=Arrangement.spacedBy(13.dp)) {
+        BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding()) {
+            val tabletQuiz=ResponsiveWindowPolicy.tabletLandscape(maxWidth.value,maxHeight.value) &&
+                page in setOf(LISTEN,DIMSUM,BRIDGE,TREASURE,DIALOGUE)
+            Column(Modifier.fillMaxSize()
+                .then(if(tabletQuiz) Modifier else Modifier.verticalScroll(rememberScrollState()))
+                .padding(horizontal=16.dp,vertical=12.dp),
+                verticalArrangement=Arrangement.spacedBy(if(tabletQuiz) 8.dp else 13.dp)) {
             Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically) {
                 KidPill("← 返回",{
                     if(page==HUB) onBack() else open(HUB)
@@ -153,6 +158,9 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
                         fontSize=13.sp,color=Sea,fontWeight=FontWeight.Bold)
                 }
             }
+            Column(Modifier.fillMaxWidth()
+                .then(if(tabletQuiz) Modifier.weight(1f) else Modifier),
+                verticalArrangement=Arrangement.spacedBy(if(page==HUB) 14.dp else 0.dp)) {
             when(page) {
                 HUB -> {
                     StoryCard(Modifier.fillMaxWidth(),Color(0xFFFFF2D5)) {
@@ -182,6 +190,8 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
                     StoryCard(Modifier.fillMaxWidth(),Color.White) {
                         Text("🔤 学习小设置",fontSize=18.sp,
                             fontWeight=FontWeight.Black,color=Ink)
+                        CantoneseHttpTtsPanel(voice)
+                        CantoneseSystemTtsPanel(voice)
                         CantoVoiceVolume(
                             current=voice.volumePercent,
                             onChange=voice::updateVolumePercent,
@@ -199,23 +209,9 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
                         CantoToggle("慢速粤语播放",slow) {
                             slow=it;prefs.edit().putBoolean("slow",it).apply()
                         }
-                        CantoToggle("优先使用设备粤语 TTS（可用时）",voice.preferSystemTts) {
-                            voice.chooseSystemTts(it)
-                        }
                         Text("发音状态：${voice.message}",color=Ink,
                             fontSize=13.sp,lineHeight=19.sp)
-                        if(voice.previewRequired) {
-                            KidPill("🔊 家长试听香港中文音色",{
-                                voice.auditionHK()
-                            },Modifier.fillMaxWidth())
-                            KidPill("✅ 我确认播放的是粤语",{
-                                voice.confirmHK()
-                            },Modifier.fillMaxWidth())
-                            KidPill("❌ 这不是粤语，不启用",{
-                                voice.rejectHK()
-                            },Modifier.fillMaxWidth())
-                        }
-                        Text("已内置粤语词语音频，安装后离线就能听。家长录音只是可选的个性化替换，不需要逐个录制。",
+                        Text("粤语示范音优先播放家长录音；选择在线音色后优先联网生成，关闭则使用系统 TTS。",
                             fontSize=12.sp,color=Ink.copy(alpha=.7f))
                     }
                 }
@@ -233,34 +229,39 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
                         StoryCard(Modifier.fillMaxWidth(),Color(0xFFFFF0DE)) {
                             Text("🔊 先准备粤语声音",fontSize=22.sp,
                                 color=Ink,fontWeight=FontWeight.Black)
-                            Text("听音找图至少需要 4 个可用的粤语音频，目前有 ${playable.size} 个。请确认 APK 内置音频资源是否完整；粤语 TTS 和家长录音仅作为备用。",
+                            Text("听音找图至少需要 4 个可用的粤语音频，目前有 ${playable.size} 个。请返回粤语乐园选择粤语在线或系统 TTS 引擎，或录制家长示范音。",
                                 color=Ink)
                             LargeAction("🍎 去词语宝典", {open(WORDS)},Modifier.fillMaxWidth())
                         }
                     } else CantoQuiz(
                         mode=LISTEN,all=words,playable=playable,voice=voice,
                         slow=slow,showJyutping=showJyutping,traditional=traditional,
-                        onRecognized=::rememberWord,onCompleted=::finishRound)
+                        onRecognized=::rememberWord,onCompleted=::finishRound,
+                    tabletLandscape=tabletQuiz)
                 }
                 DIMSUM -> {
                     val food=remember(words) {words.filter {it.category=="点心茶楼"}}
                     CantoQuiz(
                         mode=DIMSUM,all=food,playable=food,voice=voice,
                         slow=slow,showJyutping=showJyutping,traditional=traditional,
-                        onRecognized=::rememberWord,onCompleted=::finishRound)
+                        onRecognized=::rememberWord,onCompleted=::finishRound,
+                    tabletLandscape=tabletQuiz)
                 }
                 BRIDGE -> CantoneseChallengeScreen(
                     mode=CantoneseChallengeMode.BRIDGE,words=all,
                     showJyutping=showJyutping,traditional=traditional,slow=slow,
-                    voice=voice,onRecognized=::rememberWord,onCompleted=::finishRound)
+                    voice=voice,onRecognized=::rememberWord,onCompleted=::finishRound,
+                    tabletLandscape=tabletQuiz)
                 TREASURE -> CantoneseChallengeScreen(
                     mode=CantoneseChallengeMode.TREASURE,words=all,
                     showJyutping=showJyutping,traditional=traditional,slow=slow,
-                    voice=voice,onRecognized=::rememberWord,onCompleted=::finishRound)
+                    voice=voice,onRecognized=::rememberWord,onCompleted=::finishRound,
+                    tabletLandscape=tabletQuiz)
                 DIALOGUE -> CantoneseChallengeScreen(
                     mode=CantoneseChallengeMode.DIALOGUE,words=all,
                     showJyutping=showJyutping,traditional=traditional,slow=slow,
-                    voice=voice,onRecognized=::rememberWord,onCompleted=::finishRound)
+                    voice=voice,onRecognized=::rememberWord,onCompleted=::finishRound,
+                    tabletLandscape=tabletQuiz)
                 SPEAK -> CantoSpeakScreen(
                     entries=all,showJyutping=showJyutping,traditional=traditional,
                     slow=slow,voice=voice,recorder=recorder,
@@ -273,11 +274,13 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
                         notice="已删除这条本地示范音"
                     })
             }
+            } // quiz body fills remaining height only on tablets
             if(notice.isNotBlank()) {
                 Text(notice,color=Ink,fontSize=14.sp,
                     fontWeight=FontWeight.SemiBold)
             }
-            Spacer(Modifier.height(12.dp))
+            if(!tabletQuiz) Spacer(Modifier.height(12.dp))
+            }
         }
     }
 }
@@ -392,7 +395,7 @@ private fun CantoLibrary(words:List<CantoneseWord>,showJyutping:Boolean,
         if(voice.hasAudio(word))
             LargeAction("🔊 听粤语 ${if(slow) "（慢速）" else ""}",
                 {voice.speak(word,slow)},Modifier.fillMaxWidth())
-        else Text("🔇 尚无粤语示范音。可以让家长录制这一个词。",
+        else Text("🔇 请先选择粤语在线音色或系统 TTS 引擎，或由家长录制示范音。",
             color=Color(0xFF9A532C),fontSize=13.sp)
         Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) {
             KidPill("← 上一个",{index=(index-1+group.size)%group.size},Modifier.weight(1f))
@@ -409,10 +412,10 @@ private fun CantoLibrary(words:List<CantoneseWord>,showJyutping:Boolean,
                 {onRecord(word)},Modifier.fillMaxWidth())
         }
         if(voice.hasSample(word)) {
-            Text("当前使用家长示范音，可重录；删掉后会继续使用内置粤语音频。",
+            Text("当前使用家长示范音；删除后将恢复系统 TTS 朗读。",
                 color=Sea,fontSize=12.sp)
-        } else if(voice.hasBuiltIn(word)) {
-            Text("✅ 已内置粤语发音，不需要家长录音。",
+        } else if(voice.system.ready) {
+            Text("✅ 系统 TTS 已就绪，请试听确认粤语发音。",
                 color=Sea,fontSize=12.sp)
         }
         Text("可选的家长录音只保存在本机，不上传网络；录制前请确认发音正确。",
@@ -425,7 +428,7 @@ private fun CantoLibrary(words:List<CantoneseWord>,showJyutping:Boolean,
 private fun CantoQuiz(mode:String,all:List<CantoneseWord>,playable:List<CantoneseWord>,
                       voice:CantoneseSpeaker,slow:Boolean,showJyutping:Boolean,
                       traditional:Boolean,onRecognized:(CantoneseWord)->Unit,
-                      onCompleted:()->Unit) {
+                      onCompleted:()->Unit,tabletLandscape:Boolean=false) {
     val round=remember(playable,mode) {CantoneseRules.newRound(playable,5)}
     var index by remember(round) {mutableIntStateOf(0)}
     var answered by remember(index) {mutableStateOf<String?>(null)}
@@ -444,7 +447,8 @@ private fun CantoQuiz(mode:String,all:List<CantoneseWord>,playable:List<Cantones
         }
     }
     if(finished) {
-        StoryCard(Modifier.fillMaxWidth(),Color(0xFFE4F7E7)) {
+        StoryCard(if(tabletLandscape) Modifier.fillMaxSize() else Modifier.fillMaxWidth(),
+            Color(0xFFE4F7E7)) {
             Text("🎉 真叻！完成啦！",fontSize=25.sp,color=Ink,
                 fontWeight=FontWeight.Black)
             Text("这轮认识了 ${round.size} 个词 · 第一次就选对了 ${score} 题",
@@ -458,8 +462,11 @@ private fun CantoQuiz(mode:String,all:List<CantoneseWord>,playable:List<Cantones
     }
     val target=round[index]
     val options=remember(round,index,all) {CantoneseRules.options(all,target)}
-    StoryCard(Modifier.fillMaxWidth(),
+    StoryCard(if(tabletLandscape) Modifier.fillMaxSize() else Modifier.fillMaxWidth(),
         if(mode==DIMSUM) Color(0xFFFFF0DC) else Color(0xFFE8F5FF)) {
+        Column(Modifier.fillMaxWidth().then(if(tabletLandscape)
+            Modifier.weight(1f).verticalScroll(rememberScrollState()) else Modifier),
+            verticalArrangement=Arrangement.spacedBy(10.dp)) {
         Text(if(mode==DIMSUM) "🥟 点心小掌柜" else "👂 粤语小耳朵",
             fontSize=22.sp,fontWeight=FontWeight.Black,color=Ink)
         Text("第 ${index+1}/${round.size} 题",
@@ -477,7 +484,7 @@ private fun CantoQuiz(mode:String,all:List<CantoneseWord>,playable:List<Cantones
                 if(mode==DIMSUM && !voice.hasSample(target))
                     "唔該，我想食${target.traditional}" else null)},
                 Modifier.fillMaxWidth())
-        else Text("这道题暂时是图文点单：没有已核对的粤语语音，不会播普通话。",
+        else Text("请先选择粤语在线音色或系统 TTS 引擎，再试听粤语。",
             color=Color(0xFF9A532C),fontSize=13.sp)
         androidx.compose.foundation.layout.FlowRow(
             horizontalArrangement=Arrangement.spacedBy(8.dp),
@@ -522,13 +529,7 @@ private fun CantoQuiz(mode:String,all:List<CantoneseWord>,playable:List<Cantones
         if(answered==target.id) {
             Text("✅ 答对了！${target.hanzi} · ${target.meaning}",
                 fontSize=17.sp,fontWeight=FontWeight.Black,color=Ink)
-            LargeAction(if(index==round.lastIndex) "🏅 完成这一轮" else "➡️ 下一题",{
-                if(index==round.lastIndex && !ended) {
-                    ended=true
-                    onCompleted()
-                }
-                index++
-            },Modifier.fillMaxWidth())
+
         } else if(answered!=null) {
             Text("🌱 差一点，再听一次，再选选看！",
                 color=Ink,fontSize=15.sp)
@@ -536,9 +537,18 @@ private fun CantoQuiz(mode:String,all:List<CantoneseWord>,playable:List<Cantones
             Text("不会也没关系，可以反复听，也可以和家人一起猜。",
                 color=Ink.copy(alpha=.7f),fontSize=13.sp)
         }
+        } // all question content stays inside the bounded scroll area
+        if(answered==target.id) {
+            LargeAction(if(index==round.lastIndex) "🏅 完成这一轮" else "➡️ 下一题",{
+                if(index==round.lastIndex && !ended) {
+                    ended=true
+                    onCompleted()
+                }
+                index++
+            },Modifier.fillMaxWidth())
+        }
     }
 }
-
 @Composable
 private fun CantoSpeakScreen(
     entries:List<CantoneseWord>,showJyutping:Boolean,traditional:Boolean,slow:Boolean,
@@ -574,7 +584,7 @@ private fun CantoSpeakScreen(
             LargeAction("🔊 第一步：听示范音",{
                 voice.speak(item,slow)
             },Modifier.fillMaxWidth())
-        else Text("当前没有该词的粤语示范音，可以让懂粤语的家长先录制。",
+        else Text("请先选择粤语在线音色或系统 TTS 引擎，也可先录制家长示范音。",
             color=Color(0xFF934A2D),fontSize=14.sp)
         if(recordingKey=="practice") {
             LargeAction("⏹️ 停止我的录音",onStopRecord,Modifier.fillMaxWidth(),color=Coral)

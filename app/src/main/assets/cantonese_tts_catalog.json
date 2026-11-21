@@ -1,0 +1,1946 @@
+[
+  {
+    "id": "preset-00a340713f51fa08",
+    "name": "2.阿里云语音",
+    "url": "https://nls-gateway.cn-shanghai.aliyuncs.com/stream/v1/tts,{\"method\": \"POST\",\"body\": {\"appkey\":\"{{source.getLoginInfoMap().get('AppKey')}}\",\"text\":\"{{speakText}}\",\"format\":\"mp3\",\"volume\":100,\"speech_rate\":{{String((speakSpeed) * 20 - 400)}} }}",
+    "headers": "",
+    "mime": "audio/mpeg",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": true
+  },
+  {
+    "id": "preset-33c81daee55c7ca8",
+    "name": "B AI搜狗-小赵 阳光青年",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=zhao-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-33af957ab8509496",
+    "name": "B AI搜狗-康哥 标准",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=kangge-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f9c54447ddb9b8f4",
+    "name": "B AI搜狗-燕燕 童男",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=yanyan-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.2&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b12db1d588b3650e",
+    "name": "B AI搜狗-男声 醇厚 多语种",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=male-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-7300b0ca5f0fa0b7",
+    "name": "B AI搜狗-阿华 低沉",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=ahua-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.2&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-27d9994af284316c",
+    "name": "B AI搜狗-阿星 亲和",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=axing-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.2&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-dde3b8598c101479",
+    "name": "B AI搜狗-青峰 磁性 缓",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=qingfeng-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.2&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8f7d61f50dc4623c",
+    "name": "B AI搜狗外语-杰克 英语",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=en-US&speaker=male-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-74f6705440949393",
+    "name": "B AI搜狗外语-男声 英语",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=en-US&speaker=jack-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-534e44c8e4ee4940",
+    "name": "B AI搜狗方言-宝哥 陕西",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=shanxi_male-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f2b5d9d2b482b05b",
+    "name": "B AI搜狗方言-强仔 广普",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=guangpu_male-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-9d56cbedd68a0173",
+    "name": "B 搜狗翻译",
+    "url": "https://fanyi.sogou.com/reventondc/synthesis?text={{encodeURIComponent(speakText)}}&speed=0.9&lang=zh-CHS&from=translateweb&speaker=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": true
+  },
+  {
+    "id": "preset-a4d38d627a72397f",
+    "name": "B0001 度小宇",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{String((speakSpeed + 5) / 10 + 5)}}&per=1&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-522ebfbf78ce70f2",
+    "name": "B0002 度小宇",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 5}}&per=2&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=301&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-25468d7c5bb479e9",
+    "name": "B0003 度逍遥",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=3&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-e0147b24e8891bfa",
+    "name": "B0106 度博文",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=106&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=301&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b0cd7f20d53bfa57",
+    "name": "B4003 缓慢起伏",
+    "url": "http://tsn.baidu.com/text2audio,{\n\"method\": \"POST\",\n\"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 4}}&per=4003&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=6&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f2766b60791e63ce",
+    "name": "B4106 温和儒雅",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4106&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=301&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-fe924845635a47c3",
+    "name": "B4114 百度评书",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4114&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-293bdfc5597404ed",
+    "name": "B4115 情感男声",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4115&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-2b465e2b1cf7afe3",
+    "name": "B4121 青年男声",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4121&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-a86aa2ce51c9a37c",
+    "name": "B4123 百度解说",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4123&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-fcabebf750855702",
+    "name": "B4127 激情澎湃",
+    "url": "http://tts.baidu.com/text2audio,{\n\"method\": \"POST\",\n\"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 3}}&per=4127&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=6&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f0157e2d69177dbf",
+    "name": "B4127 百度主持",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4127&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-7370c79beb0128c8",
+    "name": "B4127 磁性男声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4127&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=3&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-a5e8096d0f701e71",
+    "name": "B4128 醇厚男声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4128&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f98b12204c8350f9",
+    "name": "B4129 青少年音",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4129&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-19a3f394f56c209c",
+    "name": "B4218 百度解说",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4128&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12=&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-215c0daeb23751f0",
+    "name": "B5003 说书人",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 5}}&per=5003&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-cfeeddf4b78634f2",
+    "name": "G AI搜狗-夕月 御姐",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=xiyue-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.2&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-ee5b56f5968634e0",
+    "name": "G AI搜狗-女声 温和 多语种",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=female-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-9067987c4615558f",
+    "name": "G AI搜狗-婉婷 甜美",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=wanting-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-2275d9d1783428c9",
+    "name": "G AI搜狗-婉清 冷清",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=wanqing-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-0a2226e07a5285f8",
+    "name": "G AI搜狗-小智 童女",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=xiaozhi-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-89c35647d390ccac",
+    "name": "G AI搜狗-帅帅 成熟",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=shuaishuai-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-ea73e3b3df5c8e28",
+    "name": "G AI搜狗-思思 新闻",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=sisi-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b3f55e547bb72559",
+    "name": "G AI搜狗-晶晶 标准",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=jingjing-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-5f779970bb9774e0",
+    "name": "G AI搜狗-梦暄 沉稳",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=mengxuan-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-3cf22fff9d40f054",
+    "name": "G AI搜狗-瑶瑶 活泼",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=yaoyao-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-a0d49d193353aae1",
+    "name": "G AI搜狗-若曦 柔和缓慢",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=xf5-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-1c027d9c393d0936",
+    "name": "G AI搜狗-雅妮 温柔",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=yani-pro&text={{(java.encodeURI(speakText))}} &speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-956d74c243fc5b65",
+    "name": "G AI搜狗外语-女声 英语",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=en-US&speaker=female-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-cebc7503e94465b3",
+    "name": "G AI搜狗外语-素妍 韩语",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=ko-KR&speaker=female-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-73dd219d94cc62e6",
+    "name": "G AI搜狗外语-美穗 日语",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=ja-JP&speaker=female-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-d118a3fe2b9b0fa9",
+    "name": "G AI搜狗外语-莉丽 英语",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=en-US&speaker=lily-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-c58f00554bd4989e",
+    "name": "G AI搜狗方言-婉贞 四川",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=sichuan_female-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-165a34376f377078",
+    "name": "G AI搜狗方言-宛如 台普",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=taipu_female-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-93fa2fea83759d0c",
+    "name": "G AI搜狗方言-小玉 河南",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=henan_female-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-30b91a1ca766ff5c",
+    "name": "G AI搜狗方言-文雅 湖北",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=hubei_female-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-e56e37fa0224565a",
+    "name": "G AI搜狗方言-翠萍 东北",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=dongbei_female-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-70f67649ab5382b2",
+    "name": "G 微软小娜",
+    "url": "https://o-oo.net.cn/speak.php?a={{encodeURIComponent(speakText)}}&b=zh-chs",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-fc9c8b6958e86521",
+    "name": "G 思必驰 灵动女声",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1.1&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-506a3937d62b0ed5",
+    "name": "G 网易有道",
+    "url": "https://tts.youdao.com/fanyivoice?word={{encodeURIComponent(speakText)}}&le=cn&keyfrom=speaker-target",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-dda452b4c162e139",
+    "name": "G 讯飞小琳（台普）",
+    "url": "http://120.24.87.124/cgi-bin/ekho2.pl?cmd=SPEAK&voice=iflytekXiaolin&speedDelta=0&pitchDelta=0&volumeDelta=0&text={{java.encodeURI(java.encodeURI(speakText))}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-ddfce9f5b663023a",
+    "name": "G 讯飞小美（粤语）(自我感觉这个粤语比较好听)",
+    "url": "http://120.24.87.124/cgi-bin/ekho2.pl?cmd=SPEAK&voice=iflytekXiaomei&speedDelta=0&pitchDelta=0&volumeDelta=0&text={{java.encodeURI(java.encodeURI(speakText))}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-c7959f20872eb12b",
+    "name": "G 谷歌中文",
+    "url": "https://www.google.cn/speech-api/v2/synthesize?key=AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k&enc=mpeg&client=chromium&text={{encodeURIComponent(speakText)}}&lang=zh-ch&speed=0.5",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-26ba1e4735c2a94d",
+    "name": "G 谷歌台湾",
+    "url": "https://www.google.cn/speech-api/v2/synthesize?key=AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k&enc=mpeg&client=chromium&text={{encodeURIComponent(speakText)}}&lang=zh-tw&speed=0.6",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8b27d4f62f98d107",
+    "name": "G 谷歌粤语",
+    "url": "https://www.google.cn/speech-api/v2/synthesize?key=AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k&enc=mpeg&client=chromium&text={{encodeURIComponent(speakText)}}&lang=zh-HK&speed=0.5",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-21b237b3aaa2bfe5",
+    "name": "G 鬼畜女声（普通话）",
+    "url": "http://120.24.87.124/cgi-bin/ekho2.pl?cmd=SPEAK&voice=Mandarin&speedDelta=0&pitchDelta=0&volumeDelta=0&text={{encodeURIComponent(speakText)}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-9aa029da090bac1c",
+    "name": "G0000 度小美",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=0&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-1535cc3f191801a4",
+    "name": "G0004 度丫丫",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 4}}&per=4&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-867b0ad13fe08622",
+    "name": "G0005 度小娇",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 4}}&per=5&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-19c6fce41fa01f0e",
+    "name": "G0100 标准女声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 3}}&per=100&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-a3abaf9b49ff459d",
+    "name": "G0103 可可爱爱",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=103&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=301&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-6146b47faa005020",
+    "name": "G1100 度小乔",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 5}}&per=1100&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160=&vol=5&aue=6&pit=3&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-25b1624738a2cebe",
+    "name": "G1200 普通女声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=1200&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160&vol=&rate=32=5&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8be030e502e5a232",
+    "name": "G2200 低哑女声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=2200&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=6&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-fc1c624eee5c3eee",
+    "name": "G4007 台湾女声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4007&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-06c1153af66be08b",
+    "name": "G4100 温暖女声",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4100&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220=&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-c5bdb0e808affd40",
+    "name": "G4103 卡哇伊",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4103&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-145432214070cf66",
+    "name": "G4105 情感女声",
+    "url": "http://tts.baidu.com/text2audio,{\n\"method\": \"POST\",\n\"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 3}}&per=4105&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=6&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-032c620dc24555d6",
+    "name": "G4117 优雅女声",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4117&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8cfaa9b479941832",
+    "name": "G4118 温柔女声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4118&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-bdf8ee86acee3bb1",
+    "name": "G4119 度小鹿",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4119&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-096d5aac68cb2f8b",
+    "name": "G4125 沙雕女声(这个声音真的贼沙雕好玩)",
+    "url": "http://tts.baidu.com/text2audio,{\n\"method\": \"POST\",\n\"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 3}}&per=4125&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=6&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-6e480fa47fe954c8",
+    "name": "G4126 缓慢女声(贼拉催眠)",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4126&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-57b54723efd009df",
+    "name": "G5118 优美女声",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=5118&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220=&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·80音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-1c2c085d5b1b4a25",
+    "name": "2.推荐 百度AI 情感杜逍遥",
+    "url": "http://ai.baidu.com/aidemo?type=tns&spd=5&rate=32&pit=5&vol=15&dt=1&per=3&tex={{java.encodeURI(java.encodeURI(speakText))}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-250351c0607947aa",
+    "name": "2.推荐百度 PER5118 优美女声",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=5118&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=10&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-cf221aa31f55cd51",
+    "name": "3.推荐 PER4126 百度温柔淑女",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 3}}&per=4126&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=10&aue=6&pit=7&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-08dfd0a8097b3604",
+    "name": "4.推荐 PER4114 AI百度评书",
+    "url": "http://ai.baidu.com/aidemo?type=tns&spd=5&rate=32&pit=5&vol=15&dt=1&per=4114&tex={{java.encodeURI(java.encodeURI(speakText))}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-47f62342f8e9a2d9",
+    "name": "5.推荐 百度AI 情感温柔女声",
+    "url": "http://ai.baidu.com/aidemo?type=tns&spd=5&rate=32&pit=3&vol=15&dt=1&per=4117&tex={{java.encodeURI(java.encodeURI(speakText))}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b2df62feaab1fddd",
+    "name": "6.推荐 搜狗AI 夕月(QQ浏览器御姐音)",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=xiyue-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-5421afa33fa2c61b",
+    "name": "AI 微软 小娜",
+    "url": "https://o-oo.net.cn/speak.php?a={{encodeURIComponent(speakText)}}&b=zh-chs",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-786661a815d7d600",
+    "name": "AI 思必驰",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-1318e9185c786134",
+    "name": "AI 搜狗-婉清",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=wanqing-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-47dc5b3f01c7e86e",
+    "name": "AI 搜狗-康哥",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=kangge-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-0d8409cf5d0ecd98",
+    "name": "AI 搜狗-若曦",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=xf5-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1.3&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-6842a4ed2eb60807",
+    "name": "AI 搜狗-阿华",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=ahua-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-e2fb730090f97e82",
+    "name": "AI 搜狗-阿星",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=axing-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-fbab01da8cf8aec7",
+    "name": "AI 搜狗-雅妮",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=yani-pro&text={{(java.encodeURI(speakText))}} &speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-276e00a7ca18e137",
+    "name": "AI 搜狗-青峰",
+    "url": "https://s4w-2019.zhiyin.sogou.com/tts?language_code=zh-cmn-Hans-CN&speaker=qingfeng-pro&text={{encodeURIComponent(speakText)}}&speaking_rate=1&volume=1",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-277773c0acea70f1",
+    "name": "AI 百度情感度丫丫",
+    "url": "http://ai.baidu.com/aidemo?type=tns&spd=5&rate=32&pit=5&vol=15&dt=1&per=4&tex={{java.encodeURI(java.encodeURI(speakText))}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b23996357f1edc41",
+    "name": "百度 PER0000 度小美",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=0&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f563294b20174100",
+    "name": "百度 PER0002 度小宇",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=2&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=301&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8d3439633d49ca0b",
+    "name": "百度 PER0003 度逍遥②",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=3&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-444f66463f06003f",
+    "name": "百度 PER0004 度丫丫",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=301&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-cefc23eb14c7884a",
+    "name": "百度 PER0005 度小娇",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=5&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=301&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-a102c5fe147f60ec",
+    "name": "百度 PER0100 标准女声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 3}}&per=100&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-eab3a0c70372a5aa",
+    "name": "百度 PER0103 度米朵",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=103&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=301&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-20e97ec1d4404a16",
+    "name": "百度 PER0106 度博文",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=106&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=301&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-05b4cb47c00a5116",
+    "name": "百度 PER0110 度小童",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=110&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b64f7ef4b08b11fb",
+    "name": "百度 PER0111 度小萌",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=111&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-6392706ae4837656",
+    "name": "百度 PER1100 度小乔",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=1100&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160=&vol=5&aue=6&pit=3&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-4ecb5a11bf8a805c",
+    "name": "百度 PER1200 普通女声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=1200&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160&vol=&rate=32=5&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-0907f8875c743783",
+    "name": "百度 PER4003 度逍遥①",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4003&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-26b39ae338665e98",
+    "name": "百度 PER4007 台湾女声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4007&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=3&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f448fdaf1fc6c96d",
+    "name": "百度 PER4100 温暖女声",
+    "url": "http://tts.baidu.com/text2audio,{\n\"method\": \"POST\",\n\"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 5}}&per=4100&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=6&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-6c880f254d60f005",
+    "name": "百度 PER4103 萝莉女声",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4103&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f8a045703779a4ee",
+    "name": "百度 PER4105 情感女声",
+    "url": "http://tts.baidu.com/text2audio,{\n\"method\": \"POST\",\n\"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 3}}&per=4105&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=6&aue=6&pit=4&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-11020805dbbd0ed9",
+    "name": "百度 PER4106 激情男声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4106&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=4&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-0d0fa2ea86535f4c",
+    "name": "百度 PER4114 百度评书",
+    "url": "http://tsn.baidu.com/text2audio,{\n\"method\": \"POST\",\n\"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 3}}&per=4114&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=6&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-36b3152ee3564b0a",
+    "name": "百度 PER4115 情感男声",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4115&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-4a2f82a078be95f0",
+    "name": "百度 PER4117 甜美女声",
+    "url": "http://tts.baidu.com/text2audio,{\n\t\"method\": \"POST\",\"body\":\"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4117&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=3&_res_tag_=audio\"}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-3669bb59e87e289a",
+    "name": "百度 PER4118 百度度小鹿",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 +3}}&per=4118&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=10&aue=6&pit=3&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-12c81dbe0301e1d0",
+    "name": "百度 PER4119 度小鹿",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4119&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-0d9a47f98841e194",
+    "name": "百度 PER4121 青年男声",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4121&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-1b5c1c75ef4eef67",
+    "name": "百度 PER4123 百度解说",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4123&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-00a5f8e3f32737ce",
+    "name": "百度 PER4125 沙雕女声",
+    "url": "http://tts.baidu.com/text2audio,{\n\"method\": \"POST\",\n\"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 4) / 10 + 3}}&per=4125&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=6&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-64d864354e807bc7",
+    "name": "百度 PER4127 儒雅男声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 3}}&per=4127&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-3aaa55ca8f670457",
+    "name": "百度 PER4128 醇厚男声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4128&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-74efbcb1df593468",
+    "name": "百度 PER4129 少年男音",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=4129&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=12&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-764e57fcb36de0a1",
+    "name": "百度 PER5003 说书人",
+    "url": "http://tsn.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{String((speakSpeed + 5) / 10 + 4)}}&per=5003&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=220&vol=5&pit=5&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-c8a6d11795056723",
+    "name": "百度 PER5117 百度女声",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=5117&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=232&vol=10&aue=6&pit=3&_res_tag_=audio\"\n}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-da5c8e4ecfc30b9b",
+    "name": "讯飞 小燕",
+    "url": "http://120.24.87.124/cgi-bin/ekho2.pl?cmd=SPEAK&voice=iflytek&speedDelta=0&pitchDelta=0&volumeDelta=0&text={{java.encodeURI(java.encodeURI(speakText))}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-92046f89bd7db576",
+    "name": "讯飞 小琳 台普",
+    "url": "http://120.24.87.124/cgi-bin/ekho2.pl?cmd=SPEAK&voice=iflytekXiaolin&speedDelta=0&pitchDelta=0&volumeDelta=0&text={{java.encodeURI(java.encodeURI(speakText))}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b11bfdf87d514a17",
+    "name": "讯飞 小美 粤语",
+    "url": "http://120.24.87.124/cgi-bin/ekho2.pl?cmd=SPEAK&voice=iflytekXiaomei&speedDelta=0&pitchDelta=0&volumeDelta=0&text={{java.encodeURI(java.encodeURI(speakText))}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-48ed0c3b363b236f",
+    "name": "谷歌 中文女声",
+    "url": "https://www.google.cn/speech-api/v2/synthesize?key=AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k&enc=mpeg&client=chromium&text={{encodeURIComponent(speakText)}}&lang=zh-ch&speed=0.5",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-1b3ca571cf389b95",
+    "name": "谷歌 台湾女声",
+    "url": "https://www.google.cn/speech-api/v2/synthesize?key=AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k&enc=mpeg&client=chromium&text={{encodeURIComponent(speakText)}}&lang=zh-tw&speed=0.5",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-36c3584c71fb96bb",
+    "name": "谷歌 粤语",
+    "url": "https://www.google.cn/speech-api/v2/synthesize?key=AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k&enc=mpeg&client=chromium&text={{encodeURIComponent(speakText)}}&lang=zh-HK&speed=0.5",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-63332042208836f4",
+    "name": "鬼畜 女声（普通话）",
+    "url": "http://120.24.87.124/cgi-bin/ekho2.pl?cmd=SPEAK&voice=Mandarin&speedDelta=0&pitchDelta=0&volumeDelta=0&text={{encodeURIComponent(speakText)}}",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·56音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f8f99dd24ed09ca8",
+    "name": "B AI思必驰中文-俞师 精品",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=yukaimp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-37695f52586821e0",
+    "name": "B AI思必驰中文-堂堂 童音",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=tangtang_boyfp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-5e00bc08d98974a2",
+    "name": "B AI思必驰中文-季师 精品",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=jlshimp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b09a65f994dd6663",
+    "name": "B AI思必驰中文-小军 严肃",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xijunm",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-e63a0578d8efd8cd",
+    "name": "B AI思必驰中文-小军 温和",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xijunma",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-61f40ee6d690d2d2",
+    "name": "B AI思必驰中文-小江 精品",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.8&volume=100&audioType=wav&voiceId=wjianm_xsheng",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-7a002adc06426542",
+    "name": "B AI思必驰中文-小睿 精品",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=tzruimp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-5a098fb6a3628be7",
+    "name": "B AI思必驰中文-方方 标准",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=gdfanf_natong",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-e9f1d090f8d2fd10",
+    "name": "B AI思必驰中文-方方 男童",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.8&volume=100&audioType=wav&voiceId=gdfanf_boy",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-d423b73024cf3b7c",
+    "name": "B AI思必驰中文-星哥 幽默",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=zxcm",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-08eacffeb23d5a40",
+    "name": "B AI思必驰中文-星哥 风趣",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=zxcmp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-9507b5eddf74b811",
+    "name": "B AI思必驰中文-秋木 故事",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=qiumum_0gushi",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-300549c48979cb84",
+    "name": "B AI思必驰中文-纲叔 沉稳",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=gdgm",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-61ec0b45805385a7",
+    "name": "B AI思必驰中文-老师 磁性",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=yukaim_all",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b681845dce65b040",
+    "name": "B AI思必驰中文-考拉 电台",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav&voiceId=kaolam_diantai",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-94c0e620ab802f5c",
+    "name": "B AI思必驰中文-葛爷 淡定",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=geyoump",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-e12ac607155525a9",
+    "name": "B AI思必驰中文-葛爷 风趣",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=geyou",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-28def6e1c5336a8b",
+    "name": "B AI思必驰中文-连连 可爱",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=lzliafp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8d425063f49e8660",
+    "name": "B AI思必驰中文-连连 可爱",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=lzliaf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-9df81335df770dde",
+    "name": "B AI思必驰外语-BRETT 英文",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=brettmp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-dcc0efa8917c78b1",
+    "name": "G AI思必驰中文-初阳 标准",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=cyangf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-72f638f321ca0ed4",
+    "name": "G AI思必驰中文-初阳 精品",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=cyangfp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-e53a1ef62acf8549",
+    "name": "G AI思必驰中文-婷婷 甜美",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xmguof",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b2af028f5715c2fb",
+    "name": "G AI思必驰中文-安宁 精品",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav&voiceId=aningfp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-2144e3b79f010e1c",
+    "name": "G AI思必驰中文-小九 客服",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xijiufp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-593e645a5bb90c2e",
+    "name": "G AI思必驰中文-小佚 平和",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=anonyf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-08a4ed3d47cf4468",
+    "name": "G AI思必驰中文-小兰 温柔",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=gqlanfp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-d51b3bae259ecbff",
+    "name": "G AI思必驰中文-小兰 温柔",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=gqlanf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-ddd517bf04647094",
+    "name": "G AI思必驰中文-小咪 甜美",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xmamif",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b3fd1605bd57ffe5",
+    "name": "G AI思必驰中文-小妖 传统",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xiyaof",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-0630b73308ce9fac",
+    "name": "G AI思必驰中文-小妖 清新",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xiyaof_qingxin",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-e8a904e323d72582",
+    "name": "G AI思必驰中文-小妮 邻家",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=hyanif",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-9fcf97cb7c656266",
+    "name": "G AI思必驰中文-小妮 邻家",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=hyanifa",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-258ed7f24fb27fd4",
+    "name": "G AI思必驰中文-小洁 清亮",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=smjief",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-74f755d74a9fac08",
+    "name": "G AI思必驰中文-小浩 标准",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=lucyfa",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b69a337741d672af",
+    "name": "G AI思必驰中文-小玲 欢快",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=zhilingfp_huankuai",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-6d96e61cc09fc44b",
+    "name": "G AI思必驰中文-小玲 甜美",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=zhilingfp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-98560b7e82daa56a",
+    "name": "G AI思必驰中文-小玲 甜美",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=zhilingf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-005eae2ff3b96c53",
+    "name": "G AI思必驰中文-小美 客服",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=juan1f",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-1b0621dd37b255a8",
+    "name": "G AI思必驰中文-小静 甜美",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xjingfp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-0239eb509cd93d22",
+    "name": "G AI思必驰中文-小静 飘逸",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xjingf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-5555f6476cafa401",
+    "name": "G AI思必驰中文-晶晶 知性",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=jjingfp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-884b7f3620e28dfd",
+    "name": "G AI思必驰中文-晶晶 知性",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=jjingf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-718d5385c492e7fc",
+    "name": "G AI思必驰中文-株儿 传统",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=zzherf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8faaa94d1289b4b9",
+    "name": "G AI思必驰中文-然然 可爱",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=qianranf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-a63c0690c4494a86",
+    "name": "G AI思必驰中文-瑶瑶 标准",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=luyaof",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-d6047eb0cbc870c8",
+    "name": "G AI思必驰中文-璃璃 商务",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=lili1f_shangwu",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-06e8152b59d1a861",
+    "name": "G AI思必驰中文-璃璃 娱报",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=lili1f_yubo",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-fdf173d7e9497eab",
+    "name": "G AI思必驰中文-璃璃 电台",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=lili1f_diantai",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-ed6212a6f2a7f2da",
+    "name": "G AI思必驰中文-砖砖 故事",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=zzhuaf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-cc567d9471f4241a",
+    "name": "G AI思必驰中文-绝音 恐怖",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.6&volume=100&audioType=wav&voiceId=juyinf_guigushi",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-ec2ac6a2c199484a",
+    "name": "G AI思必驰中文-考拉 清纯",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=kaolaf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-ac39a6001d486017",
+    "name": "G AI思必驰中文-芳芳 客服",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=gdfanfp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-5d672a9edb522e01",
+    "name": "G AI思必驰中文-蓝雨 传统",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=lanyuf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-972c394d01c646e2",
+    "name": "G AI思必驰中文-行者 精品",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xizhefp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-060dcf7dca9d7ed0",
+    "name": "G AI思必驰中文-贝壳 传统",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xbekef",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-f9caa98f48e73cdd",
+    "name": "G AI思必驰中文-阿姨 标准",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.8&volume=100&audioType=wav&voiceId=yaayif",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-0e79db7ae57ee93e",
+    "name": "G AI思必驰中文-零八 清新",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=linbafp_qingxin",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8433b7ec0223281a",
+    "name": "G AI思必驰中文-风吟 传统",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.8&volume=100&audioType=wav&voiceId=feyinf",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-1e2c72b08f768d71",
+    "name": "G AI思必驰中文-风吟 精品",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=feyinfp",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-7f8886276a5778d0",
+    "name": "G AI思必驰中文-麻豆 娱播",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=madoufp_yubo",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-3d7b4c3a27598785",
+    "name": "G AI思必驰中文-麻豆 温柔",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=madoufp_wenrou",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-cd9af2fb549f3bd7",
+    "name": "G AI思必驰方言-何春 粤语",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=hchunf_ctn",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-e58b25fb77fec173",
+    "name": "G AI思必驰方言-叶子 上海",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=yezi1f_csh",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-28c2e93fd2d513ae",
+    "name": "G AI思必驰方言-大瑶 山东",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=dayaof_csd",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-dc5cc1a21c2a7e84",
+    "name": "G AI思必驰方言-文卿 四川",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=wqingf_csn",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-647de06cc1e02e66",
+    "name": "G AI思必驰方言-晓健 粤语",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=lunaif_ctn",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-3e34ca6de77a4213",
+    "name": "G AI思必驰方言-木兰 河南",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=xizhuf_cyu",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8f2b52f2e625ad52",
+    "name": "G AI思必驰方言-翠花 东北",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav&voiceId=xjingf_cdb",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-4688d960e7dae794",
+    "name": "G AI思必驰方言-胖胖 四川",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=ppangf_csn",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-94da74786028b72c",
+    "name": "G AI思必驰方言-风颜 闽南",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_yubo&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=0.9&volume=100&audioType=wav&voiceId=qfyanf_cmn",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-340800a3d9c3b9bd",
+    "name": "思必驰 季老师",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=jlshimp&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=6&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-76859977e693ad2c",
+    "name": "思必驰 晶晶",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=jjingfp&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=6&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-71b43b90e8e36619",
+    "name": "思必驰 考拉",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=kaolam_diantai&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=6&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-b1108ef1a2eed726",
+    "name": "思必驰-温柔",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=madoufp_wenrou&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=6&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-3c36aa0b9fbb3ee8",
+    "name": "思必驰优雅",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=zhilingfp&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=6&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-8bf0a065ecbb40d8",
+    "name": "思必驰俞老师",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=yukaimp&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-0aa5a61e0b6e662d",
+    "name": "思必驰季老师",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=jlshimp&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=6&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-3a74583eb5216a76",
+    "name": "思必驰客服女声",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=gdfanfp&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=6&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-33091c0125500945",
+    "name": "思必驰小军",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=xijunma&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-7ee1d8af8d284f34",
+    "name": "思必驰小江",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=wjianm_xsheng&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-bedcf54127f64070",
+    "name": "思必驰川话",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=ppangf_csn&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-418c54008f011e61",
+    "name": "思必驰欢快",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=zhilingfp_huankuai&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  },
+  {
+    "id": "preset-d691bcf948f4f5c8",
+    "name": "思必驰温柔",
+    "url": "https://dds.dui.ai/runtime/v1/synthesize?voiceId=gqlanfp&text={{java.encodeURI(java.encodeURI(speakText))}}&speed=1&volume=100&audioType=wav",
+    "headers": "",
+    "mime": "",
+    "origin": "Legado 社区·84音色",
+    "requiresLogin": false
+  }
+]

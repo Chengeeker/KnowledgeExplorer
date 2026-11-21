@@ -1,0 +1,26 @@
+CosyVoice3-MNN integration
+===========================
+
+Original source: https://github.com/Nian27/CosyVoice3-MNN
+Source revision: b4c2fafde21d1f138bfcd0ccaf7ddd9dcca2511a
+Core engine and native libraries: Apache License 2.0 (LICENSE).
+
+Original model architecture and pretrained weights:
+https://github.com/QwenAudio/CosyVoice
+https://huggingface.co/VicenTrent/Cosy-Voice-MNN
+Weights: Fun-CosyVoice3-0.5B-2512 RL distilled MNN.
+Full packaged model checksum:
+SHA-256 B1C74DFC90972D82D8166813620A882FE37A0DC02964E19C4F33DAAFEFEB1C84
+
+Modified integration code:
+- Original com.cosyvoice.app and io.legado.app.cosy packages kept for JNI compatibility.
+- OkHttp4 nullable ResponseBody handling adjusted.
+- Added CantoneseCosyVoice.kt, CantoneseCosyPanel.kt and
+  CantoneseSpeaker playback/cache/failed-synthesis fallback integration.
+
+The user must not assume Cantonese pronunciation quality based solely on a
+successful compile or model integrity check. Device and native-speaker
+validation is needed before using generated voice as a teaching reference.
+
+Dependencies may carry additional licenses. Review upstream third-party
+notices when distributing modified native libraries or model variants.

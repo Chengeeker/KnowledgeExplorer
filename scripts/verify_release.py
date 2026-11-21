@@ -2,7 +2,7 @@ from pathlib import Path
 from collections import Counter
 import zipfile,json,xml.etree.ElementTree as ET,hashlib
 root=Path(r"D:\App\Game\Knowledge")
-apk=root/"KnowledgeExplorer-v0.1.15-signed.apk"
+apk=root/"KnowledgeExplorer-v0.1.29-signed.apk"
 assert apk.is_file(), "SIGNED APK MISSING"
 with zipfile.ZipFile(apk) as z:
     names=set(z.namelist())
@@ -43,7 +43,7 @@ with zipfile.ZipFile(apk) as z:
     print("KINDS",dict(Counter(q["kind"] for q in questions)))
     print("SIGNATURE_ASSETS_PRESENT",any(n.startswith("META-INF") for n in names))
     print("APK_SIZE",apk.stat().st_size)
-    print("APK_SHA256",hashlib.sha256(apk.read_bytes()).hexdigest())
+    print("APK_SHA256",hashlib.file_digest(apk.open('rb'), 'sha256').hexdigest())
 results=root/"app"/"build"/"test-results"/"testDebugUnitTest"
 cases=[]
 for f in results.glob("TEST-*.xml"):
@@ -60,6 +60,8 @@ assert set(c["answer_only_answer"] for c in conversions)=={"正确","错误"}
 from runpy import run_path
 run_path(str(root/"scripts/check_interaction_routes.py"))
 run_path(str(root/"scripts/check_tablet_pcm.py"))
+run_path(str(root/"scripts/check_tablet_next_button.py"))
+
 print("JUDGMENT_TO_CHOICE_CONVERSIONS",len(conversions),"ALL_CHECKS_PASSED")
 
 
@@ -87,7 +89,7 @@ assert 'Transliterator.getInstance("Han-Latin")' in pinyin
 import re
 for f in sources:
     # Cantonese uses ordinary Text intentionally: never label it with Mandarin pinyin.
-    if f.name in ("PinyinText.kt","CantonesePlayground.kt","CantoneseChallenges.kt"):continue
+    if f.name in ("PinyinText.kt","CantonesePlayground.kt","CantoneseChallenges.kt","CantoneseSystemTtsPanel.kt","CantoneseHttpTtsPanel.kt"):continue
     assert not re.search(r'(?<![\w])Text\(',f.read_text("utf8")),f.name
 print("PINYIN_UI_WIRING_OK",len(sources)-2,"files")
 
@@ -115,12 +117,21 @@ assert "CANTONESE -> CantonesePlayground" in activity
 assert "onCantonese:()->Unit" in home
 assert "RECORD_AUDIO" in manifest and 'android:required="false"' in manifest
 assert "LocalShowPinyin provides false" in hub, "Mandarin pinyin must not label spoken Cantonese"
-assert "isNetworkConnectionRequired" in speaker
-assert "hkVoiceConfirmed" in speaker and "previewRequired" in hub
+assert "val ready:Boolean get()=system.ready" in speaker
+assert "CantoneseSystemTtsPanel(voice)" in hub
+assert "CantoneseHttpTtsPanel(voice)" in hub
+with zipfile.ZipFile(apk) as bundle:
+    tts=json.loads(bundle.read("assets/cantonese_tts_catalog.json"))
+assert len(tts)>=190, "Online speech catalog is incomplete"
+for name in ("讯飞","思必驰","搜狗","谷歌"):
+    assert any(name in rule["name"] for rule in tts), name
+assert "CantoneseHttpTts" in speaker and "http.generate(" in speaker
+print("CANTONESE_LEGADO_HTTP_TTS_OK",len(tts),"rule_presets")
+
 assert "recordingKey" in hub and "CantoQuiz" in hub
-assert "setSpeechRate" in speaker and 'app.filesDir,"cantonese_samples"' in speaker
+assert 'app.filesDir,"cantonese_samples"' in speaker and 'fun speak(word:CantoneseWord' in speaker
 print("CANTONESE_RESOURCES_OK","words",180,"phrases",42,
-      "categories",12,"audio_fallback","verified","privacy","offline")
+      "categories",12,"audio_fallback","verified","privacy","native_tts")
 
 feedback=(root/"app/src/main/java/com/game/knowledge/KidFeedback.kt").read_text("utf8")
 layout=(root/"app/src/main/java/com/game/knowledge/PinyinText.kt").read_text("utf8")
@@ -136,34 +147,23 @@ assert 'MainModeTile("🦁","粤语乐园"' in home
 assert 'StoryCard(modifier.clickable {feedback?.tap();onClick()}' in home
 print("CANTONESE_FEEDBACK_AND_PINYIN_BASELINE_OK","independent_sound_haptics","shared_glyph_cells")
 
-# Ready-to-play offline Cantonese recordings must be in the signed APK.
-with zipfile.ZipFile(apk) as audio_archive:
-    audio_manifest=json.loads(audio_archive.read("assets/cantonese_audio/manifest.json"))
-    audio_names=set(audio_archive.namelist())
-    audio_sizes={item.filename:item.file_size for item in audio_archive.infolist()}
-clips=audio_manifest["items"]
-assert len(clips)==232 and len({x["id"] for x in clips})==232
-assert len([x for x in clips if x["id"].startswith("order_")])==10
-assert all(x["duration_seconds"]>.3 for x in clips)
-assert all(x["effective_jyutping"]==x["jyutping"] for x in clips if x["jyutping"])
-assert sum(bool(x["tone_correction"]) for x in clips)>=6
-for row in clips:
-    name="assets/cantonese_audio/"+row["id"]+".wav"
-    assert name in audio_names,name
-    assert audio_sizes[name]==row["bytes"]
-assert "bundledFile(word.id)" in speaker and "fun hasBuiltIn(word:CantoneseWord)" in speaker
-assert "CantoQuiz" in hub
+# No pre-recorded Cantonese WAV assets or external-site shortcuts.
+with zipfile.ZipFile(apk) as packed:
+    names=set(packed.namelist())
+    assert not any(n.startswith("assets/cantonese_audio/") for n in names)
+    assert not any("cosyvoice" in n.lower() or "mnn" in n.lower() for n in names)
+    assert apk.stat().st_size < 35_000_000, "a large bundled model or native runtime is still packaged"
+assert "CantoneseOnlineSite" not in hub
+assert "fun hasAudio(word:CantoneseWord)" in speaker and "system.speak(" in speaker
+assert "bundledFile(" not in speaker
 home=(root/"app/src/main/java/com/game/knowledge/Screens.kt").read_text("utf8")
 assert "val reading=LocalShowPinyin.current" in home
-assert 'if(tablet && reading)' in home
+assert "if(tablet && reading)" in home
 assert ".verticalScroll(rememberScrollState())" in home
 assert "max(base*1.09f" in layout
-assert sum(x["removed_pause_seconds"] for x in clips)>8
-assert all(x["normalized_gain"]>=0 for x in clips)
-assert {x["id"] for x in clips if not x["id"].startswith("order_")}=={x["id"] for x in canto}
-print("READY_TO_PLAY_CANTONESE_AUDIO_OK",len(clips),
-      "VALIDATED_JYUTPING",sum(bool(x["jyutping"]) for x in clips),
-      "PHONE_AND_TABLET_HOME_PINYIN_LAYOUT_OK")
+assert 'verticalArrangement=Arrangement.spacedBy(if(page==HUB) 14.dp else 0.dp)' in hub
+assert 'TextToSpeech' in (root/"app/src/main/java/com/game/knowledge/CantoneseSystemTts.kt").read_text("utf8")
+print("CANTONESE_SYSTEM_TTS_OK","no_embedded_model","no_browser_redirect","spaced_cards","native_engines")
 
 volumePolicy=(root/"app/src/main/java/com/game/knowledge/CantoneseVolumePolicy.kt").read_text("utf8")
 assert 'DEFAULT_PERCENT=150' in volumePolicy
@@ -171,7 +171,7 @@ assert 'MAX_PERCENT=200' in volumePolicy and 'MIN_PERCENT=0' in volumePolicy
 assert 'LoudnessEnhancer(active.audioSessionId)' in speaker
 assert 'cantoneseVoiceVolume' in speaker and 'prefs.edit().putInt' in speaker
 assert 'updatePlayingVolume()' in speaker and 'CantoneseVolumePolicy.playerGain(volumePercent)' in speaker
-assert 'TextToSpeech.Engine.KEY_PARAM_VOLUME' in speaker
+assert 'CantoneseSystemTts' in speaker
 assert 'CantoVoiceVolume(' in hub and 'voice::updateVolumePercent' in hub
 assert 'onPreview' in hub and 'phrase_hello' in hub
 print("CANTONESE_VOLUME_CONTROL_OK", "0..200%", "saved", "preview", "isolated")

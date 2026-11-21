@@ -93,17 +93,18 @@ internal fun TabletChallengeBody(
                 PinyinText("请选择正确答案；答题不需要等待倒计时。",
                     fontSize=14.sp,color=Ink.copy(alpha=.75f))
             }
-        }
-        // Answer choices occupy the lower portion instead of being crushed
-        // against the top of a scrollable landscape page.
-        options.chunked(2).forEach {pair ->
-            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(11.dp)){
-                pair.forEach {option->
-                    ChoiceButton(option,if(choice==null) null else when(option) {
-                        q.answer->true
-                        choice->false
-                        else->null
-                    },choice==null,{onChoose(option)},Modifier.weight(1f))
+            // Long options and ruby glyphs cannot push the fixed Next footer
+            // off the bottom of a short landscape screen.
+            options.chunked(2).forEach {pair ->
+                Row(Modifier.fillMaxWidth(),
+                    horizontalArrangement=Arrangement.spacedBy(11.dp)) {
+                    pair.forEach {option->
+                        ChoiceButton(option,if(choice==null) null else when(option) {
+                            q.answer->true
+                            choice->false
+                            else->null
+                        },choice==null,{onChoose(option)},Modifier.weight(1f))
+                    }
                 }
             }
         }

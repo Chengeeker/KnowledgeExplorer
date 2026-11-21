@@ -2,10 +2,13 @@ package com.game.knowledge
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -64,7 +67,8 @@ internal fun CantoneseChallengeScreen(
     slow:Boolean,
     voice:CantoneseSpeaker,
     onRecognized:(CantoneseWord)->Unit,
-    onCompleted:()->Unit
+    onCompleted:()->Unit,
+    tabletLandscape:Boolean=false
 ) {
     val feedback=LocalKidFeedback.current
     var batch by remember(mode){mutableIntStateOf(0)}
@@ -95,20 +99,17 @@ internal fun CantoneseChallengeScreen(
         CantoneseChallengeMode.TREASURE->Color(0xFFFFF1D8)
         CantoneseChallengeMode.DIALOGUE->Color(0xFFEEE8FF)
     }
-    StoryCard(Modifier.fillMaxWidth(),tint) {
+    StoryCard(if(tabletLandscape) Modifier.fillMaxSize() else Modifier.fillMaxWidth(),tint) {
+        Column(Modifier.fillMaxWidth().then(if(tabletLandscape)
+            Modifier.weight(1f).verticalScroll(rememberScrollState()) else Modifier),
+            verticalArrangement=Arrangement.spacedBy(10.dp)) {
         Text(title,color=Ink,fontWeight=FontWeight.Black,fontSize=23.sp)
         if(complete) {
             Text("🌟 你完成了这一轮！",color=Ink,fontWeight=FontWeight.Black,
                 fontSize=22.sp)
             Text("第一次就答对了 $correct / 5 题。新词听多了就会记住。",
                 color=Ink,fontSize=16.sp)
-            LargeAction("🔁 换一组再玩",{
-                voice.stop()
-                index=0
-                correct=0
-                batch++
-                feedback?.tap()
-            },Modifier.fillMaxWidth())
+
         } else if(current!=null) {
             Text("第 ${index+1}/${round.size} 题",color=Sea,
                 fontWeight=FontWeight.Bold)
@@ -174,16 +175,28 @@ internal fun CantoneseChallengeScreen(
             if(selected==current.id) {
                 Text("✅ 答对啦！${current.meaning}，下次可以在生活中试着说。",
                     color=Ink,fontSize=14.sp)
+
+            } else {
+                Text(if(mistakes>0) "差一点，再试一次就好！" else
+                    "先听再猜，不会也没关系。",color=Ink,fontSize=13.sp)
+            }
+        }
+        } // questions, choices, feedback may scroll while action stays visible
+        if(complete) {
+            LargeAction("🔁 换一组再玩",{
+                voice.stop()
+                index=0
+                correct=0
+                batch++
+                feedback?.tap()
+            },Modifier.fillMaxWidth())
+        } else if(current!=null && selected==current.id) {
                 LargeAction(if(index==round.lastIndex)"🏅 完成闯关" else "➡ 下一道",{
                     voice.stop()
                     if(index==round.lastIndex) onCompleted()
                     index++
                     feedback?.tap()
                 },Modifier.fillMaxWidth())
-            } else {
-                Text(if(mistakes>0) "差一点，再试一次就好！" else
-                    "先听再猜，不会也没关系。",color=Ink,fontSize=13.sp)
-            }
         }
     }
 }
