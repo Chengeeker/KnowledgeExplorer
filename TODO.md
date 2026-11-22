@@ -2,6 +2,7 @@
 - [x] 六个生活小游戏并入「粤语乐园经典玩法」；接话玩法使用经典名「对话小剧场」。
 - [x] 点击题目朗读完整情境问题，点击任一选项朗读该选项。
 - [x] 构建并核验正式 arm64-v8a 同签名 APK，旧包检查通过后清理。
+- [x] GitHub 正式发行版已发布：[v0.1.36](https://github.com/Chengeeker/KnowledgeExplorer/releases/tag/v0.1.36)；APK 9,956,020 字节，SHA-256 `a1990ef5048f5171d62100b6dec2c75d274879abe33f3886150249ac2fcdda03`。
 - [ ] 在 Android 设备试听题目和选项播报，并检查首页布局。
 
 ## [x] v0.1.35 · 扩展四地区接话题库
