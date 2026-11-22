@@ -8,17 +8,17 @@ fruit_strawberry|word|水果乐园|草莓|草莓|cou2 mui4|草莓|🍓|红红的
 fruit_pineapple|word|水果乐园|菠萝|菠蘿|bo1 lo4|菠萝|🍍|有香甜味道的水果
 fruit_mango|word|水果乐园|芒果|芒果|mong1 gwo2|芒果|🥭|广东夏天常见水果
 fruit_pear|word|水果乐园|梨|梨|lei4|梨子|🍐|清甜多汁的水果
-fruit_lychee|word|水果乐园|荔枝|荔枝|lai6 zi1|荔枝|🔴|岭南特色水果之一
+fruit_lychee|word|水果乐园|荔枝|荔枝|lai6 zi1|荔枝|🧺|岭南特色水果之一
 food_hargow|word|点心茶楼|虾饺|蝦餃|haa1 gaau2|虾仁馅的蒸饺|🥟|广式早茶常见点心
-food_siumai|word|点心茶楼|烧卖|燒賣|siu1 maai6|蒸制的烧卖点心|🥟|试着在早茶时认一认
-food_charbaau|word|点心茶楼|叉烧包|叉燒包|caa1 siu1 baau1|里面有叉烧馅的包子|🥟|热腾腾的广式包点
+food_siumai|word|点心茶楼|烧卖|燒賣|siu1 maai6|蒸制的烧卖点心|🍽️|试着在早茶时认一认
+food_charbaau|word|点心茶楼|叉烧包|叉燒包|caa1 siu1 baau1|里面有叉烧馅的包子|🍞|热腾腾的广式包点
 food_cheungfun|word|点心茶楼|肠粉|腸粉|coeng4 fan2|用米浆蒸出来的粉皮点心|🍽️|广东很多早餐店都有
 food_eggtart|word|点心茶楼|蛋挞|蛋撻|daan6 taat1|里面有蛋奶馅的小挞|🥧|外皮酥酥的甜点
-food_turnipcake|word|点心茶楼|萝卜糕|蘿蔔糕|lo4 baak6 gou1|用萝卜和米粉等做的糕点|🍘|常见的传统糕点
-food_ricechicken|word|点心茶楼|糯米鸡|糯米雞|no6 mai5 gai1|荷叶包着糯米和馅料的点心|🍙|打开荷叶就能闻到香味
-food_chickenfeet|word|点心茶楼|凤爪|鳳爪|fung6 zaau2|茶楼里的鸡脚点心|🍗|点心菜单上的常见名称
-food_soymilk|word|点心茶楼|豆浆|豆漿|dau6 zoeng1|豆子做的饮品|🥛|早餐常见饮品
-food_milktea|word|点心茶楼|奶茶|奶茶|naai5 caa4|加奶的茶饮品|🧋|给小朋友练习点餐用语
+food_turnipcake|word|点心茶楼|萝卜糕|蘿蔔糕|lo4 baak6 gou1|用萝卜和米粉等做的糕点|🍰|常见的传统糕点
+food_ricechicken|word|点心茶楼|糯米鸡|糯米雞|no6 mai5 gai1|荷叶包着糯米和馅料的点心|🍃🍚|打开荷叶就能闻到香味
+food_chickenfeet|word|点心茶楼|凤爪|鳳爪|fung6 zaau2|茶楼里的鸡脚点心|🍽️|点心菜单上的常见名称
+food_soymilk|word|点心茶楼|豆浆|豆漿|dau6 zoeng1|豆子做的饮品|🫘|早餐常见饮品
+food_milktea|word|点心茶楼|奶茶|奶茶|naai5 caa4|加奶的茶饮品|🍵|给小朋友练习点餐用语
 animal_cat|word|动物朋友|猫|貓|maau1|猫咪|🐱|会喵喵叫的小动物
 animal_dog|word|动物朋友|狗|狗|gau2|狗狗|🐶|汪汪叫的小动物
 animal_fish|word|动物朋友|鱼|魚|jyu4|鱼|🐟|会在水里游泳
@@ -42,7 +42,7 @@ family_paternalgrandmother|word|家人称呼|嫲嫲|嫲嫲|maa4 maa4|奶奶|👵
 life_eat|word|生活小事|食饭|食飯|sik6 faan6|吃饭|🍚|和家人一起吃饭时可以试试
 life_water|word|生活小事|饮水|飲水|jam2 seoi2|喝水|💧|口渴时说我想饮水
 life_sleep|word|生活小事|瞓觉|瞓覺|fan3 gaau3|睡觉|😴|睡前可以说我要瞓觉
-life_play|word|生活小事|玩|玩|waan2|玩耍|🎮|可以邀请家人一起玩
+life_play|word|生活小事|玩|玩|waan2|玩耍|🛝|可以邀请家人一起玩
 life_school|word|生活小事|返学|返學|faan1 hok6|上学|🎒|上幼儿园也可以这样说
 life_read|word|生活小事|睇书|睇書|tai2 syu1|看书|📖|看绘本时可以使用
 life_listen|word|生活小事|听歌|聽歌|teng1 go1|听歌|🎵|喜欢的音乐可以再听一次
@@ -63,7 +63,7 @@ phrase_hello|phrase|日常对话|你好|你好|nei5 hou2|打招呼：你好|👋
 phrase_please|phrase|日常对话|唔该|唔該|m4 goi1|麻烦别人或接受服务时说谢谢|🙏|请求帮助时很常用
 phrase_thanks|phrase|日常对话|多谢|多謝|do1 ze6|收到礼物或别人好意时道谢|🎁|感谢别人送的东西
 phrase_bye|phrase|日常对话|拜拜|拜拜|baai1 baai3|再见|👋|分别时可以说
-phrase_wantwater|phrase|日常对话|我想饮水|我想飲水|ngo5 soeng2 jam2 seoi2|我想喝水|🥛|口渴时可以告诉家人
+phrase_wantwater|phrase|日常对话|我想饮水|我想飲水|ngo5 soeng2 jam2 seoi2|我想喝水|💧|口渴时可以告诉家人
 phrase_wanteat|phrase|日常对话|我想食饭|我想食飯|ngo5 soeng2 sik6 faan6|我想吃饭|🍚|肚子饿了可以说
 phrase_friends|phrase|日常对话|我哋一齐玩|我哋一齊玩|ngo5 dei6 jat1 cai4 waan2|我们一起玩吧|🧩|邀请家人和朋友一起玩
 phrase_whatis|phrase|日常对话|呢个系咩|呢個係咩|ni1 go3 hai6 me1|这是什么|❓|遇到好奇的东西就问

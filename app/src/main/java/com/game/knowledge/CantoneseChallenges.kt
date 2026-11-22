@@ -73,10 +73,11 @@ internal fun CantoneseChallengeScreen(
     val feedback=LocalKidFeedback.current
     var batch by remember(mode){mutableIntStateOf(0)}
     val eligible=remember(words,mode){CantoneseChallengeRules.eligible(mode,words)}
+    val roundSize=if(mode==CantoneseChallengeMode.DIALOGUE) 3 else 5
     val round=remember(eligible,batch) {
-        eligible.shuffled(Random(System.nanoTime())).take(5)
+        eligible.shuffled(Random(System.nanoTime())).take(roundSize)
     }
-    if(round.size<4) {
+    if(eligible.size<4) {
         Text("主题正在补充中，请先体验词语宝典。",color=Ink,fontSize=16.sp)
         return
     }
@@ -92,7 +93,7 @@ internal fun CantoneseChallengeScreen(
     val title=when(mode) {
         CantoneseChallengeMode.BRIDGE->"🧩 粤普变变变"
         CantoneseChallengeMode.TREASURE->"🗺️ 生活寻宝"
-        CantoneseChallengeMode.DIALOGUE->"💬 对话小剧场"
+        CantoneseChallengeMode.DIALOGUE->"💬 这句点接？"
     }
     val tint=when(mode) {
         CantoneseChallengeMode.BRIDGE->Color(0xFFE4F6EC)
@@ -107,7 +108,7 @@ internal fun CantoneseChallengeScreen(
         if(complete) {
             Text("🌟 你完成了这一轮！",color=Ink,fontWeight=FontWeight.Black,
                 fontSize=22.sp)
-            Text("第一次就答对了 $correct / 5 题。新词听多了就会记住。",
+            Text("第一次就答对了 $correct / ${round.size} 题。新词听多了就会记住。",
                 color=Ink,fontSize=16.sp)
 
         } else if(current!=null) {
@@ -119,7 +120,7 @@ internal fun CantoneseChallengeScreen(
                 CantoneseChallengeMode.TREASURE ->
                     "听一听并找到「${current.meaning}」这件东西！"
                 CantoneseChallengeMode.DIALOGUE ->
-                    "遇到这个情况：${current.meaning}。该怎样用粤语回答？"
+                    "看情境，选一句合适的粤语回应：${current.meaning}"
             }
             Text(instruction,color=Ink,fontSize=17.sp,
                 fontWeight=FontWeight.Bold)
@@ -162,7 +163,7 @@ internal fun CantoneseChallengeScreen(
                             }.padding(11.dp),
                             horizontalAlignment=Alignment.CenterHorizontally,
                             verticalArrangement=Arrangement.spacedBy(6.dp)) {
-                            Text(option.emoji,fontSize=33.sp,textAlign=TextAlign.Center)
+                            CantonesePicture(option,33)
                             Text(if(traditional)option.traditional else option.hanzi,
                                 color=Ink,fontSize=17.sp,fontWeight=FontWeight.Black,
                                 textAlign=TextAlign.Center)

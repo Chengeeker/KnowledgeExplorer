@@ -1,7 +1,6 @@
 package com.game.knowledge
 
 import android.content.Context
-import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import androidx.compose.runtime.getValue
@@ -13,14 +12,16 @@ import java.io.ByteArrayOutputStream
 import java.net.URLEncoder
 import java.security.MessageDigest
 import java.util.Locale
-import java.util.UUID
 import java.util.concurrent.Executors
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONArray
 import org.json.JSONObject
+
+private const val RETAINED_VOICE_ID="preset-ddfce9f5b663023a"
 
 internal data class LegadoHttpVoice(
     val id: String,
@@ -28,13 +29,8 @@ internal data class LegadoHttpVoice(
     val url: String,
     val headers: String = "",
     val mime: String = "",
-    val origin: String = "手动新增",
     val requiresLogin: Boolean = false,
-) {
-    fun asJson() = JSONObject().put("id", id).put("name", name).put("url", url)
-        .put("headers", headers).put("mime", mime).put("origin", origin)
-        .put("requiresLogin", requiresLogin)
-}
+)
 
 /**
  * Sandboxed subset of Legado HTTP TTS URL rules. Never evaluates arbitrary JS.
@@ -173,18 +169,35 @@ internal class CantoneseHttpTts(private val app:Context) {
         private set
     var selectedId by mutableStateOf(prefs.getString("selected","").orEmpty())
         private set
-    var speed by mutableIntStateOf(prefs.getInt("speed",15).coerceIn(5,50))
+    var speedDelta by mutableIntStateOf(prefs.getInt("speedDelta",0).coerceIn(-30,30))
+        private set
+    var pitchDelta by mutableIntStateOf(prefs.getInt("pitchDelta",0).coerceIn(-20,20))
+        private set
+    var volumeDelta by mutableIntStateOf(prefs.getInt("volumeDelta",0).coerceIn(-50,20))
         private set
     var busy by mutableStateOf(false)
         private set
-    var status by mutableStateOf("可导入《阅读》HTTP TTS 规则；试听会把文字发往对应的第三方服务器")
+    var status by mutableStateOf("试听会把文字发送到在线语音服务")
         private set
     val selected:LegadoHttpVoice? get()=voices.firstOrNull{it.id==selectedId}
     val available:Boolean get()=enabled && selected!=null
     init {
-        val stored=prefs.getString("rules",null)
-        voices=runCatching{parseRules(stored ?: app.assets.open("cantonese_tts_catalog.json")
+        val previousSelection=prefs.getString("selected","")
+        val previousRules=prefs.getString("rules",null)
+        val wasEnabled=enabled
+        voices=runCatching{parseRules(app.assets.open("cantonese_tts_catalog.json")
             .bufferedReader().use{it.readText()})}.getOrDefault(emptyList())
+            .filter{it.id==RETAINED_VOICE_ID}
+        selectedId=voices.firstOrNull()?.id.orEmpty()
+        val retained=voices.firstOrNull()
+        val oldRuleMatches=previousRules==null || runCatching {
+            parseRules(previousRules).firstOrNull{it.id==RETAINED_VOICE_ID}
+                ?.let{retained!=null && it.url==retained.url && it.headers==retained.headers}==true
+        }.getOrDefault(false)
+        enabled=wasEnabled && previousSelection==RETAINED_VOICE_ID && oldRuleMatches && retained!=null
+        prefs.edit().remove("rules").remove("speed").putString("selected",selectedId)
+            .putBoolean("enabled",enabled).putInt("speedDelta",speedDelta)
+            .putInt("pitchDelta",pitchDelta).putInt("volumeDelta",volumeDelta).apply()
     }
 
     private fun parseRules(json:String):List<LegadoHttpVoice> {
@@ -193,107 +206,29 @@ internal class CantoneseHttpTts(private val app:Context) {
             val o=list.optJSONObject(i)?:return@mapNotNull null
             val raw=o.optString("url").trim()
             if(!raw.startsWith("http://") && !raw.startsWith("https://"))return@mapNotNull null
-            val id=o.optString("id").ifBlank{"user-"+UUID.randomUUID().toString()}
+            val id=o.optString("id").ifBlank{return@mapNotNull null}
             LegadoHttpVoice(
                 id=id, name=o.optString("name").ifBlank{"未命名音色"}.take(150),
                 url=raw.take(8000),
                 headers=o.optString("headers",o.optString("header","")).take(4000),
                 mime=o.optString("mime",o.optString("contentType","")).take(100),
-                origin=o.optString("origin","Legado 导入"),
                 requiresLogin=o.optBoolean("requiresLogin",false) ||
                     o.optString("loginUrl").isNotBlank() ||
                     o.optString("loginUi").isNotBlank(),
             )
         }
     }
-    private fun save() {
-        val json=JSONArray()
-        voices.forEach{json.put(it.asJson())}
-        prefs.edit().putString("rules",json.toString()).apply()
-    }
-    fun importJsonError(message:String) {status=message}
     fun toggle(value:Boolean) {
         enabled=value
         prefs.edit().putBoolean("enabled",value).apply()
     }
-    fun choose(id:String) {
-        if(voices.none{it.id==id})return
-        selectedId=id
-        enabled=true
-        prefs.edit().putString("selected",id).putBoolean("enabled",true).apply()
-        status="已选择音色；试听前请确认第三方接口的使用条款和隐私政策"
-    }
-    fun changeSpeed(value:Int) {
-        speed=value.coerceIn(5,50)
-        prefs.edit().putInt("speed",speed).apply()
-    }
-    fun saveRule(id:String?,name:String,url:String,headers:String,mime:String) {
-        require(name.trim().isNotBlank()){"请输入音色名称"}
-        val address=url.trim().substringBefore(",{")
-        require(address.startsWith("http://") || address.startsWith("https://")){"必须填写 HTTP/HTTPS 链接"}
-        if(headers.isNotBlank()) JSONObject(headers)
-        val existing=voices.firstOrNull{it.id==id}
-        val item=LegadoHttpVoice(id=existing?.id?:"user-"+UUID.randomUUID(),
-            name=name.trim().take(150),url=url.trim().take(8000),
-            headers=headers.trim().take(4000),mime=mime.trim().take(100),
-            origin=existing?.origin?:"自定义",requiresLogin=false)
-        voices=if(existing==null)voices+item else voices.map{if(it.id==id)item else it}
-        save()
-        choose(item.id)
-        status="音色规则已保存"
-    }
-    fun remove(id:String) {
-        voices=voices.filterNot{it.id==id}
-        if(selectedId==id){selectedId="";toggle(false);prefs.edit().remove("selected").apply()}
-        save()
-        status="音色已删除"
-    }
-    fun importJson(text:String):Int {
-        require(text.length<=1_000_000){"导入文件超过 1 MB"}
-        val incoming=parseRules(text)
-        val have=voices.map{it.name to it.url}.toHashSet()
-        val new=incoming.filter{have.add(it.name to it.url)}.map {
-            it.copy(id="import-"+UUID.randomUUID().toString())
-        }
-        voices=voices+new
-        save()
-        status="成功导入 "+new.size+" 条规则（重复规则已跳过）"
-        return new.size
-    }
-    fun importFile(uri:Uri) {
-        worker.execute {
-            val result=runCatching{
-                val bytes=app.contentResolver.openInputStream(uri)?.use{it.readBytes()}
-                    ?:error("文件无法读取")
-                require(bytes.size<=1_000_000){"文件不能超过 1 MB"}
-                String(bytes,Charsets.UTF_8)
-            }
-            main.post {
-                result.onSuccess{runCatching{importJson(it)}.onFailure {e->status="导入失败："+e.message}}
-                    .onFailure{status="导入失败："+it.message}
-            }
-        }
-    }
-    fun importUrl(address:String) {
-        require(address.startsWith("https://")){"网络导入只支持 HTTPS"}
-        worker.execute {
-            val result=runCatching{
-                client.newCall(Request.Builder().url(address).get().build()).execute().use{r->
-                    if(!r.isSuccessful)error("HTTP "+r.code)
-                    val bytes=r.body?.bytes() ?:error("响应为空")
-                    require(bytes.size<=1_000_000){"规则文件超过 1 MB"}
-                    String(bytes,Charsets.UTF_8)
-                }
-            }
-            main.post {
-                result.onSuccess{runCatching{importJson(it)}.onFailure{e->status="导入失败："+e.message}}
-                    .onFailure{status="网络导入失败："+it.message}
-            }
-        }
-    }
+    fun changeSpeed(value:Int) {speedDelta=value.coerceIn(-30,30);prefs.edit().putInt("speedDelta",speedDelta).apply()}
+    fun changePitch(value:Int) {pitchDelta=value.coerceIn(-20,20);prefs.edit().putInt("pitchDelta",pitchDelta).apply()}
+    fun changeVolume(value:Int) {volumeDelta=value.coerceIn(-50,20);prefs.edit().putInt("volumeDelta",volumeDelta).apply()}
     private fun key(rule:LegadoHttpVoice,text:String,slow:Boolean):String {
         val bytes=MessageDigest.getInstance("SHA-256")
-            .digest((rule.url+"|"+rule.headers+"|"+text+"|"+slow+"|"+speed).toByteArray())
+            .digest((rule.url+"|"+rule.headers+"|"+text+"|"+slow+"|"+
+                speedDelta+"|"+pitchDelta+"|"+volumeDelta).toByteArray())
         return bytes.joinToString(""){"%02x".format(it)}.take(40)
     }
     fun cached(text:String,slow:Boolean):File? {
@@ -327,8 +262,12 @@ internal class CantoneseHttpTts(private val app:Context) {
     }
     private fun fetch(rule:LegadoHttpVoice,text:String,slow:Boolean):File {
         if(rule.requiresLogin)error("需要登录鉴权：请改为带有效凭据的 HTTP 规则")
-        val options=LegadoTtsRequestCompiler.compile(rule.url,text,speed.coerceAtMost(
-            if(slow) 9 else 50))
+        val options=LegadoTtsRequestCompiler.compile(rule.url,text,0)
+        val url=options.url.toHttpUrl().newBuilder()
+            .setQueryParameter("speedDelta",(speedDelta-if(slow)10 else 0).coerceIn(-30,30).toString())
+            .setQueryParameter("pitchDelta",pitchDelta.toString())
+            .setQueryParameter("volumeDelta",volumeDelta.toString())
+            .build()
         val headers=JSONObject()
         if(rule.headers.isNotBlank()){
             val o=JSONObject(rule.headers)
@@ -337,7 +276,7 @@ internal class CantoneseHttpTts(private val app:Context) {
         }
         val keys=options.headers.keys()
         while(keys.hasNext()){val k=keys.next();headers.put(k,options.headers.getString(k))}
-        val builder=Request.Builder().url(options.url)
+        val builder=Request.Builder().url(url)
         val names=headers.keys()
         while(names.hasNext()){
             val k=names.next()

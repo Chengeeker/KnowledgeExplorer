@@ -73,6 +73,21 @@ class CantoneseSpeaker(context:Context) {
     }
     fun hasSample(word:CantoneseWord):Boolean=sampleFile(word.id).isFile
     fun hasAudio(word:CantoneseWord):Boolean=hasSample(word) || system.ready || http.available
+    fun speakText(text:String,slow:Boolean=false):Boolean {
+        if(closed || text.isBlank()) return false
+        stop()
+        val clean=text.trim().take(120)
+        if(http.available) {
+            val epoch=playbackEpoch
+            http.generate(clean,slow) {file->
+                if(closed || epoch!=playbackEpoch)return@generate
+                if(file!=null)playFile(file)
+                else if(system.ready)system.speak(clean,slow,volumePercent)
+            }
+            return true
+        }
+        return system.speak(clean,slow,volumePercent)
+    }
     fun previewOnline(text:String,slow:Boolean=false) {
         if(closed || !http.available || text.isBlank()) return
         stop()
@@ -85,18 +100,8 @@ class CantoneseSpeaker(context:Context) {
         if(closed) return false
         val sample=sampleFile(word.id)
         if(sample.isFile) return playFile(sample,slow)
-        stop()
         val text=phrase ?: word.traditional
-        if(http.available) {
-            val epoch=playbackEpoch
-            http.generate(text,slow) {file->
-                if(closed || epoch!=playbackEpoch)return@generate
-                if(file!=null)playFile(file)
-                else if(system.ready)system.speak(text,slow,volumePercent)
-            }
-            return true
-        }
-        return system.speak(text,slow,volumePercent)
+        return speakText(text,slow)
     }
     fun playFile(file:File,slow:Boolean=false):Boolean {
         if(!file.isFile || closed) return false

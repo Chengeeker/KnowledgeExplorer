@@ -38,6 +38,24 @@ private const val SPEAK="speak"
 private const val BRIDGE="bridge"
 private const val TREASURE="treasure"
 private const val DIALOGUE="dialogue"
+private const val SENTENCE="sentence"
+private const val LISTEN_ANSWER="listen_answer"
+private const val TASK="task"
+private const val TIME="time"
+private const val PRICE="price"
+
+@Composable
+internal fun CantonesePicture(word:CantoneseWord,size:Int) {
+    if(word.id=="food_siumai") {
+        androidx.compose.foundation.Image(
+            painter=androidx.compose.ui.res.painterResource(R.drawable.cantonese_siumai),
+            contentDescription=word.hanzi,
+            modifier=Modifier.size(size.dp)
+        )
+    } else {
+        Text(word.emoji,fontSize=size.sp,textAlign=TextAlign.Center)
+    }
+}
 
 /**
  * Opt-in, game-first Cantonese learning: no forced voice scoring, no automatic
@@ -142,7 +160,8 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
     CompositionLocalProvider(LocalShowPinyin provides false) {
         BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding()) {
             val tabletQuiz=ResponsiveWindowPolicy.tabletLandscape(maxWidth.value,maxHeight.value) &&
-                page in setOf(LISTEN,DIMSUM,BRIDGE,TREASURE,DIALOGUE)
+                page in setOf(LISTEN,DIMSUM,BRIDGE,TREASURE,DIALOGUE,
+                    SENTENCE,LISTEN_ANSWER,TASK,TIME,PRICE)
             Column(Modifier.fillMaxSize()
                 .then(if(tabletQuiz) Modifier else Modifier.verticalScroll(rememberScrollState()))
                 .padding(horizontal=16.dp,vertical=12.dp),
@@ -171,6 +190,8 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
                         Text("已认识 ${favorites.size}/${all.size} 个表达 · 完成 ${completed} 轮小游戏",
                             color=Sea,fontSize=14.sp,fontWeight=FontWeight.Bold)
                     }
+                    Text("✨ 粤语乐园经典玩法",fontSize=20.sp,
+                        fontWeight=FontWeight.Black,color=Ink)
                     CantoModeCard("🍎","粤语词语宝典","看图片、听读音、学生活中的词语",
                         Color(0xFFE5F8EC)) {open(WORDS)}
                     CantoModeCard("👂","粤语小耳朵","听一个粤语词，找出正确的图片",
@@ -179,13 +200,21 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
                         Color(0xFFFFE9D9)) {open(DIMSUM)}
                     CantoModeCard("🎤","跟我讲粤语","听示范、自己录音回放，想讲才讲",
                         Color(0xFFF5E8FF)) {open(SPEAK)}
-                    Text("✨ 更多趣味闯关",fontSize=20.sp,
-                        fontWeight=FontWeight.Black,color=Ink)
                     CantoModeCard("🧩","粤普变变变","从普通话的意思，找到对应的粤语词",
                         Color(0xFFE4F6EC)) {open(BRIDGE)}
                     CantoModeCard("🗺️","生活寻宝","听提示，在广东生活场景中找物品",
                         Color(0xFFFFF1D8)) {open(TREASURE)}
-                    CantoModeCard("💬","对话小剧场","遇到不同情况，挑出合适的粤语短句",
+                    CantoModeCard("🧩","句子拼拼乐","把词语排成一句粤语。",
+                        Color(0xFFE4F6EC)) {open(SENTENCE)}
+                    CantoModeCard("👂","听一听","听提问，选回答。",
+                        Color(0xFFE0F1FF)) {open(LISTEN_ANSWER)}
+                    CantoModeCard("🎭","生活小任务","跟着目标，完成一段生活对话。",
+                        Color(0xFFFFE9D9)) {open(TASK)}
+                    CantoModeCard("🕒","听懂时间","听粤语报时，选出正确时间。",
+                        Color(0xFFFFF1D8)) {open(TIME)}
+                    CantoModeCard("💰","听听多少钱","听价格，填金额。",
+                        Color(0xFFE5F8EC)) {open(PRICE)}
+                    CantoModeCard("💬","对话小剧场","遇到不同情况，挑出合适的粤语短句。",
                         Color(0xFFEEE8FF)) {open(DIALOGUE)}
                     StoryCard(Modifier.fillMaxWidth(),Color.White) {
                         Text("🔤 学习小设置",fontSize=18.sp,
@@ -257,10 +286,23 @@ fun CantonesePlayground(onBack:()->Unit,onNarrating:(Boolean)->Unit) {
                     showJyutping=showJyutping,traditional=traditional,slow=slow,
                     voice=voice,onRecognized=::rememberWord,onCompleted=::finishRound,
                     tabletLandscape=tabletQuiz)
-                DIALOGUE -> CantoneseChallengeScreen(
-                    mode=CantoneseChallengeMode.DIALOGUE,words=all,
-                    showJyutping=showJyutping,traditional=traditional,slow=slow,
-                    voice=voice,onRecognized=::rememberWord,onCompleted=::finishRound,
+                DIALOGUE -> CantoneseWebsiteChoiceGameScreen(
+                    mode=CantoneseWebsiteGame.REPLY,slow=slow,voice=voice,
+                    onCompleted=::finishRound,tabletLandscape=tabletQuiz)
+                SENTENCE -> CantoneseSentenceGameScreen(
+                    slow=slow,voice=voice,onCompleted=::finishRound,
+                    tabletLandscape=tabletQuiz)
+                LISTEN_ANSWER -> CantoneseWebsiteChoiceGameScreen(
+                    mode=CantoneseWebsiteGame.LISTEN,slow=slow,voice=voice,
+                    onCompleted=::finishRound,tabletLandscape=tabletQuiz)
+                TASK -> CantoneseWebsiteChoiceGameScreen(
+                    mode=CantoneseWebsiteGame.TASK,slow=slow,voice=voice,
+                    onCompleted=::finishRound,tabletLandscape=tabletQuiz)
+                TIME -> CantoneseWebsiteChoiceGameScreen(
+                    mode=CantoneseWebsiteGame.TIME,slow=slow,voice=voice,
+                    onCompleted=::finishRound,tabletLandscape=tabletQuiz)
+                PRICE -> CantonesePriceGameScreen(
+                    slow=slow,voice=voice,onCompleted=::finishRound,
                     tabletLandscape=tabletQuiz)
                 SPEAK -> CantoSpeakScreen(
                     entries=all,showJyutping=showJyutping,traditional=traditional,
@@ -353,7 +395,7 @@ private fun CantoToggle(label:String,checked:Boolean,onChange:(Boolean)->Unit) {
 @Composable
 private fun CantoReading(word:CantoneseWord,traditional:Boolean,
                          showJyutping:Boolean,large:Boolean=false) {
-    Text(word.emoji,fontSize=if(large) 62.sp else 32.sp,textAlign=TextAlign.Center)
+    CantonesePicture(word,if(large) 62 else 32)
     Text(if(traditional) word.traditional else word.hanzi,
         color=Ink,fontSize=if(large) 30.sp else 23.sp,
         fontWeight=FontWeight.Black,textAlign=TextAlign.Center)
@@ -517,7 +559,7 @@ private fun CantoQuiz(mode:String,all:List<CantoneseWord>,playable:List<Cantones
                     .padding(12.dp),
                     horizontalAlignment=Alignment.CenterHorizontally,
                     verticalArrangement=Arrangement.spacedBy(4.dp)) {
-                    Text(option.emoji,fontSize=45.sp)
+                    CantonesePicture(option,45)
                     Text(if(traditional) option.traditional else option.hanzi,
                         fontSize=18.sp,fontWeight=FontWeight.Black,color=Ink,
                         textAlign=TextAlign.Center)
